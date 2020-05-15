@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
@@ -63,7 +65,15 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
 
     @Override
     public void run() {
-        draw();
+        while (true) {
+            try {
+                Thread.sleep(500);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            draw();
+        }
     }
 
     private Handler handler = new Handler() {
@@ -76,9 +86,9 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
     private void draw() {
         try {
             canvas = holder.lockCanvas();
+//            canvas.drawColor(PixelFormat.TRANSPARENT, PorterDuff.Mode.CLEAR);
             canvas.drawColor(Color.WHITE);
             drawBulletText(canvas);
-            //canvas.drawColor(Color.WHITE);
             //canvas.drawPath(mPath, paint);
         } catch (Exception e) {
 
@@ -93,9 +103,7 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
         if (canvas != null && bulletChatContentInfos != null && bulletChatContentInfos.size() > 0) {
             for (BulletChatContentInfo mBulletChatContentInfo :
                     bulletChatContentInfos) {
-                canvas.drawText(mBulletChatContentInfo.getBulletCharMessage(), 960, 200, paint);
-//                canvas.drawTextOnPath();
-//                canvas.drawText
+                canvas.drawText(mBulletChatContentInfo.getBulletCharMessage(), mBulletChatContentInfo.bulletChatXposi += 20, mBulletChatContentInfo.bulletChatYposi, paint);
             }
         }
     }

@@ -2,6 +2,9 @@ package com.yuntongxun.mysurfaceviewdemo;
 
 public class BulletChatContentInfo {
 
+    public int bulletChatXposi = 0;
+    public int bulletChatYposi = (int) (Math.random() * 400);
+
     public String getBulletCharMessage() {
         return bulletCharMessage;
     }
