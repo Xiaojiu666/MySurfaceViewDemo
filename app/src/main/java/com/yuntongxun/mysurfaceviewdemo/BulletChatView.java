@@ -9,8 +9,11 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -19,6 +22,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
+
+import com.sn.utils.systemUtils.ECTimerHandler;
+import com.sn.utils.systemUtils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +38,18 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
 
     private SurfaceHolder holder;
     private Canvas canvas;
-    private Paint paint;
+    private Paint paint, paintClear;
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     private List<BulletChatContentInfo> bulletChatContentInfos;
+    private int maxLines = 20;
+    private int memberSize = 100;
+
+    private int viewHeigth;
+
+    private int viewWidth;
+
+    private boolean isStart;
 
     public BulletChatView(Context context) {
         super(context);
@@ -53,45 +67,66 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
     }
 
     private void initView() {
+
         holder = getHolder();
+        setZOrderOnTop(true);
         holder.addCallback(this);
+        holder.setFormat(PixelFormat.TRANSLUCENT);//使窗口支持透明度
         paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(30);
+        paintClear = new Paint();
+        paintClear.setColor(Color.BLACK);
+        paintClear.setStrokeWidth(200);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(40);
         initData();
     }
 
+
     private void initData() {
         bulletChatContentInfos = new ArrayList<>();
-        for (int i = 0; i <= 50; i++) {
+        for (int i = 0; i <= memberSize; i++) {
             BulletChatContentInfo bulletChatContentInfo = new BulletChatContentInfo();
-            bulletChatContentInfo.setBulletCharMessage("郭旭" + i + i);
-            bulletChatContentInfo.setGetBulletChatXMoveSpeed((int) (Math.random() * (6 - 4) + 4));
+            bulletChatContentInfo.setBulletCharMessage("郭旭好帅" + i);
+            bulletChatContentInfo.setGetBulletChatXMoveSpeed(getGetBulletChatXMoveSpeed());
             bulletChatContentInfos.add(bulletChatContentInfo);
         }
-
+        int colu = (int) Math.ceil((double) bulletChatContentInfos.size() / maxLines);
+        for (int i = 0; i < colu; i++) {
+            for (int j = 0; j < maxLines; j++) {
+                if ((i * maxLines) + j < bulletChatContentInfos.size()) {
+                    BulletChatContentInfo mBulletChatContentInfo = bulletChatContentInfos.get((i * maxLines) + j);
+                    // 计算 每个对象的
+                    int bulletChatXinitLocal = mBulletChatContentInfo.bulletChatXposi + i * 300;
+                    mBulletChatContentInfo.setBulletChatXposi(bulletChatXinitLocal);
+                }
+            }
+        }
     }
+
+    private int getGetBulletChatXMoveSpeed() {
+        return (int) (Math.random() * (6 - 1) + 1);
+    }
+
 
     @Override
     public void run() {
-        while (isDrawComplate) {
-            draw();
+        while (true) {
+            if (isStart) {
+                draw();
+            }
         }
     }
 
     @Override
     public void invalidate() {
         super.invalidate();
-
     }
 
-    public boolean isDrawComplate = true;
 
     private void draw() {
         try {
             canvas = holder.lockCanvas();
             canvas.drawColor(PixelFormat.TRANSPARENT, PorterDuff.Mode.CLEAR);
-            canvas.drawColor(Color.WHITE);
             drawBulletText(canvas);
         } catch (Exception e) {
         } finally {
@@ -103,46 +138,27 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
 
     private void drawBulletText(Canvas canvas) {
         if (canvas != null && bulletChatContentInfos != null && bulletChatContentInfos.size() > 0) {
-            for (BulletChatContentInfo mBulletChatContentInfo :
-                    bulletChatContentInfos) {
-                Log.e(TAG, "value : " + mBulletChatContentInfo.bulletChatYposi);
-                canvas.drawText(mBulletChatContentInfo.getBulletCharMessage(), mBulletChatContentInfo.bulletChatXposi += mBulletChatContentInfo.getGetBulletChatXMoveSpeed(), mBulletChatContentInfo.bulletChatYposi * 30, paint);
+            for (int i = 0; i < bulletChatContentInfos.size(); i++) {
+                BulletChatContentInfo mBulletChatContentInfo = bulletChatContentInfos.get(i);
+                if (mBulletChatContentInfo.getBulletChatXposi() < viewWidth )
+                    canvas.drawText(mBulletChatContentInfo.getBulletCharMessage(),
+                            mBulletChatContentInfo.bulletChatXposi += mBulletChatContentInfo.getGetBulletChatXMoveSpeed(),
+                            (i % maxLines) * 40 + 40, paint);
             }
         }
-    }
-
-    private void translate(final Canvas canvas) {
-        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
-        anim.setDuration(300);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = (float) animation.getAnimatedValue();
-                canvas.translate(1080 - 1080 * currentValue, 200);
-            }
-        });
-        anim.start();
     }
 
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         initThread();
+        viewHeigth = getHeight();
+        viewWidth = getWidth();
     }
 
     private void initThread() {
         Thread thread = new Thread(this);
         thread.start();
-//        mHandlerThread = new HandlerThread("handler Thread");
-//        mHandlerThread.start();
-//        handler = new Handler(mHandlerThread.getLooper()) {
-//            @Override
-//            public void handleMessage(@NonNull Message msg) {
-//                switch (msg.what) {
-//
-//                }
-//            }
-//        };
     }
 
     @Override
@@ -157,7 +173,12 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
 
     @Override
     public void startBulletChat() {
+        isStart = true;
+    }
 
+    @Override
+    public void stopBulletChat() {
+        isStart = false;
     }
 
     @Override
@@ -167,7 +188,20 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
 
     @Override
     public void clearView() {
+        isStart = false;
+        try {
+            //这是定义橡皮擦画笔
+            Paint clearPaint = new Paint();
+            clearPaint.setAntiAlias(true);
+            clearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+            Canvas canvas = holder.lockCanvas();
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            holder.unlockCanvasAndPost(canvas);
+        } catch (Exception e) {
+            // e.printStackTrace();
+        } finally {
 
+        }
     }
 
     @Override
@@ -177,7 +211,12 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
 
     @Override
     public void insertBulletChatData(BulletChatContentInfo bulletChatContentInfoList) {
-
+        if (bulletChatContentInfoList == null) {
+            return;
+        }
+        bulletChatContentInfoList.setBulletChatXposi(-30);
+        bulletChatContentInfoList.setGetBulletChatXMoveSpeed(getGetBulletChatXMoveSpeed());
+        bulletChatContentInfos.add(bulletChatContentInfoList);
     }
 
     @Override

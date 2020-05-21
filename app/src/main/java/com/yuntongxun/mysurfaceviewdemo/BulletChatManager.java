@@ -9,11 +9,17 @@ public interface BulletChatManager {
     }
 
     void startBulletChat();
-    // 设置弹幕模式
-    void setBulletChatMode(BulletChatMode bulletChatMode);
+
+    void stopBulletChat();
+
 
     // 清屏
     void clearView();
+
+    // 设置弹幕模式
+    void setBulletChatMode(BulletChatMode bulletChatMode);
+
+
 
     // 设置弹幕数据
     void setBulletChatData(List<BulletChatContentInfo> bulletChatContentInfoList);
