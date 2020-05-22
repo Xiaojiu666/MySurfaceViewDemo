@@ -42,7 +42,7 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     private List<BulletChatContentInfo> bulletChatContentInfos;
-    private int maxLines = 20;
+    private int maxLines = 10;
     private int memberSize = 100;
 
     private int viewHeigth;

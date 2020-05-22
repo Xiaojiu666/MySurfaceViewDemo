@@ -1,2 +1,2 @@
 rootProject.name='MySurfaceViewDemo'
-include ':app', ':libs_common'
+include ':app', ':libs_common', ':libs_video'
