@@ -23,8 +23,7 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.sn.utils.systemUtils.ECTimerHandler;
-import com.sn.utils.systemUtils.ScreenUtils;
+
 
 import java.util.ArrayList;
 import java.util.List;
