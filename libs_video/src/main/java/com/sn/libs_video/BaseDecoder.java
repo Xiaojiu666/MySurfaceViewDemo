@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * 定义解码器
  */
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-public abstract class                                           BaseDecoder implements IDecoder {
+public abstract class BaseDecoder implements IDecoder {
 
 
     BaseDecoder(String mFilePath) {
@@ -72,6 +72,11 @@ public abstract class                                           BaseDecoder impl
      * 解码数据信息
      */
     private MediaCodec.BufferInfo mBufferInfo = new MediaCodec.BufferInfo();
+
+    /**
+     * 开始解码时间，用于音视频同步
+     */
+    private long mStartTimeForSync = -1L;
 
     private DecodeState mState = DecodeState.STOP;
 
@@ -218,20 +223,26 @@ public abstract class                                           BaseDecoder impl
         if (!init())
             return;
         Log.e(TAG, "  mIsRunning  " + mIsRunning);
-//        while (mIsRunning) {
         while (mIsRunning) {
             if (mState != DecodeState.START &&
                     mState != DecodeState.DECODING &&
                     mState != DecodeState.SEEKING) {
                 Log.e(TAG, " waitDecode " + mState);
+                // ---------【同步时间矫正】-------------
+                //恢复同步的起始时间，即去除等待流失的时间
+                mStartTimeForSync = System.currentTimeMillis() - getCurTimeStamp();
                 waitDecode();
             }
 
             if (!mIsRunning ||
                     mState == DecodeState.STOP) {
-                Log.e(TAG, " STOPDecode  mIsRunning : " + mIsRunning + " , decodeState : "+ mState);
+                Log.e(TAG, " STOPDecode  mIsRunning : " + mIsRunning + " , decodeState : " + mState);
                 mIsRunning = false;
                 break;
+            }
+
+            if (mStartTimeForSync == -1L) {
+                mStartTimeForSync = System.currentTimeMillis();
             }
 
             //如果数据没有解码完毕，将数据推入解码器解码
@@ -243,6 +254,11 @@ public abstract class                                           BaseDecoder impl
             //【解码步骤：3. 将解码好的数据从缓冲区拉取出来】
             int index = pullBufferFromDecoder();
             if (index >= 0) {
+                // ---------【音视频同步】-------------
+                if (mState == DecodeState.DECODING) {
+                    sleepRender();
+                }
+
                 //【解码步骤：4. 渲染】
                 render(mOutputBuffers[index], mBufferInfo);
                 //【解码步骤：5. 释放输出缓冲】
@@ -260,6 +276,22 @@ public abstract class                                           BaseDecoder impl
         doneDecode();
         //【解码步骤：7. 释放解码器】
         release();
+    }
+
+    private long getCurTimeStamp() {
+        return mBufferInfo.presentationTimeUs / 1000;
+    }
+
+    private void sleepRender() {
+        try {
+            long passTime = System.currentTimeMillis() - mStartTimeForSync;
+            long curTime = getCurTimeStamp();
+            if (curTime > passTime) {
+                Thread.sleep(curTime - passTime);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -332,6 +364,7 @@ public abstract class                                           BaseDecoder impl
             } else {
                 mCodec.queueInputBuffer(inputBufferIndex, 0,
                         sampleSize, mExtractor.getCurrentTimestamp(), 0);
+                //Log.e(TAG, "pushBufferToDecoder getCurrentTimestamp " + mExtractor.getCurrentTimestamp());
             }
         }
         return isEndOfStream;
