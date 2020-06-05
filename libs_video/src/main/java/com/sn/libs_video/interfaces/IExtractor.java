@@ -20,6 +20,8 @@ public interface IExtractor {
      */
     Long getCurrentTimestamp();
 
+    int getSampleFlag();
+
     /**
      * Seek到指定位置，并返回实际帧的时间戳
      */

@@ -106,6 +106,7 @@ public class MMExtractor {
             return -1;
         }
         mCurSampleTime = mExtractor.getSampleTime();
+        mCurSampleFlag = mExtractor.getSampleFlags();
         mExtractor.advance();
         return readSampleCount;
     }
@@ -157,6 +158,15 @@ public class MMExtractor {
      */
     public long getCurrentTimestamp() {
         return mCurSampleTime;
+    }
+
+    /**
+     * 当前帧标志
+     */
+    private int mCurSampleFlag;
+
+    public int getSampleFlag() {
+        return mCurSampleFlag;
     }
 
 }

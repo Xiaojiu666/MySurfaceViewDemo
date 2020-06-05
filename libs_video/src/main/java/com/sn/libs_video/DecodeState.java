@@ -8,6 +8,8 @@ public enum DecodeState {
     DECODING,
     /**解码暂停*/
     PAUSE,
+    /**解码恢复*/
+    RESUME,
     /**正在快进*/
     SEEKING,
     /**解码完成*/

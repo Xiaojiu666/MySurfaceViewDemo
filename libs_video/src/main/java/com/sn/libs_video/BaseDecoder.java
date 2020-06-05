@@ -29,7 +29,7 @@ public abstract class BaseDecoder implements IDecoder {
     }
 
 
-    public static final String TAG = "BaseDecoder";
+    public String TAG = getName();
 
     //-------------线程相关------------------------
     /**
@@ -93,6 +93,9 @@ public abstract class BaseDecoder implements IDecoder {
 
     private long mEndPos;
 
+    public String getName() {
+        return getClass().getSimpleName();
+    }
 
     void setStateListener(IDecoderStateListener l) {
         mStateListener = l;
@@ -100,7 +103,8 @@ public abstract class BaseDecoder implements IDecoder {
 
     @Override
     public void pause() {
-        mState = DecodeState.DECODING;
+        mState = DecodeState.PAUSE;
+        mIsRunning = true;
     }
 
     @Override
@@ -111,10 +115,9 @@ public abstract class BaseDecoder implements IDecoder {
 
     @Override
     public void stop() {
-        mState = DecodeState.STOP;
-        mIsRunning = false;
-        notifyDecode();
+        mState = DecodeState.PAUSE;
     }
+
 
     @Override
     public boolean isDecoding() {
@@ -211,9 +214,10 @@ public abstract class BaseDecoder implements IDecoder {
         return null;
     }
 
+
     @Override
     public void run() {
-
+        Log.e(TAG, "Thread Name " + Thread.currentThread().getName());
         if (mState == DecodeState.STOP) {
             mState = DecodeState.START;
         }
@@ -224,6 +228,7 @@ public abstract class BaseDecoder implements IDecoder {
             return;
         Log.e(TAG, "  mIsRunning  " + mIsRunning);
         while (mIsRunning) {
+            // 暂停解码
             if (mState != DecodeState.START &&
                     mState != DecodeState.DECODING &&
                     mState != DecodeState.SEEKING) {
@@ -295,7 +300,7 @@ public abstract class BaseDecoder implements IDecoder {
     }
 
 
-    private void release() {
+    public void release() {
         try {
             mState = DecodeState.STOP;
             mIsEOS = false;
@@ -341,7 +346,6 @@ public abstract class BaseDecoder implements IDecoder {
      */
     public void notifyDecode() {
         synchronized (mLock) {
-            Log.e(TAG, "  notifyDecode  " + "唤醒线程");
             mLock.notifyAll();
         }
         if (mState == DecodeState.DECODING) {

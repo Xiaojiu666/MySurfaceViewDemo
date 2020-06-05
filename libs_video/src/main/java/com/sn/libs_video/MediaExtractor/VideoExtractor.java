@@ -31,6 +31,11 @@ public class VideoExtractor implements IExtractor {
     }
 
     @Override
+    public int getSampleFlag() {
+        return mMediaExtractor.getSampleFlag();
+    }
+
+    @Override
     public Long seek(long pos) {
         return mMediaExtractor.seek(pos);
     }
