@@ -1,7 +1,10 @@
 package com.yuntongxun.mysurfaceviewdemo;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Looper;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -9,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sn.processcommunication.Client.MyServiceProxy;
+import com.sn.processcommunication.Server.IMyService;
+import com.sn.processcommunication.Server.MyService;
 import com.yuntongxun.mysurfaceviewdemo.VideoPlayer.VideoActivity;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class GuideActivity extends AppCompatActivity {
@@ -29,6 +36,33 @@ public class GuideActivity extends AppCompatActivity {
         initView();
         initData();
         initClick();
+        initTest();
+        ActivityManager
+    }
+
+    private void initTest() {
+        MyService myService = new MyService();
+        try {
+            Class<?> serviceManager = Class.forName("android.os.ServiceManager");
+            Method method = serviceManager.getMethod("addService", String.class, IBinder.class);
+
+            method.invoke(null, "testService", myService);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            Class<?> serviceManager = Class.forName("android.os.ServiceManager");
+            Method method = serviceManager.getMethod("getService", String.class);
+            IBinder ibinder = (IBinder) method.invoke(null, "testService");
+            IMyService myService1 = new MyServiceProxy(ibinder);
+            myService1.callHi("binder");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
     }
 
     private void initClick() {
