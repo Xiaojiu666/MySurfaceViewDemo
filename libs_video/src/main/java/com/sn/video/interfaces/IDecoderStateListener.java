@@ -1,7 +1,7 @@
-package com.sn.libs_video.interfaces;
+package com.sn.video.interfaces;
 
-import com.sn.libs_video.BaseDecoder;
-import com.sn.libs_video.Frame;
+import com.sn.video.BaseDecoder;
+import com.sn.video.Frame;
 
 public interface IDecoderStateListener {
 

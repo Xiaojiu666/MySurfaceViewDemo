@@ -1,20 +1,18 @@
-package com.sn.libs_video;
+package com.sn.video;
 
 import android.media.MediaCodec;
-import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.sn.libs_video.interfaces.IDecoder;
-import com.sn.libs_video.interfaces.IDecoderStateListener;
-import com.sn.libs_video.interfaces.IExtractor;
+import com.sn.video.interfaces.IDecoder;
+import com.sn.video.interfaces.IDecoderStateListener;
+import com.sn.video.interfaces.IExtractor;
 
 import java.io.File;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 
 /**

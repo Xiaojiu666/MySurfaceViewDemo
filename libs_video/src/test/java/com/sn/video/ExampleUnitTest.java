@@ -1,4 +1,4 @@
-package com.sn.libs_video;
+package com.sn.video;
 
 import org.junit.Test;
 

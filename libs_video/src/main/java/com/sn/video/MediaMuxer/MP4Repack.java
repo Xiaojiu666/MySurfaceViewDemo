@@ -1,11 +1,11 @@
-package com.sn.libs_video.MediaMuxer;
+package com.sn.video.MediaMuxer;
 
 import android.media.MediaCodec;
 import android.media.MediaFormat;
 import android.util.Log;
 
-import com.sn.libs_video.MediaExtractor.AudioExtractor;
-import com.sn.libs_video.MediaExtractor.VideoExtractor;
+import com.sn.video.MediaExtractor.AudioExtractor;
+import com.sn.video.MediaExtractor.VideoExtractor;
 
 import java.nio.ByteBuffer;
 

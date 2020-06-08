@@ -1,4 +1,4 @@
-package com.sn.libs_video.MediaExtractor;
+package com.sn.video.MediaExtractor;
 
 
 import android.media.MediaExtractor;

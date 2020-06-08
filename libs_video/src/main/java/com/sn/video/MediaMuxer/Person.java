@@ -1,4 +1,4 @@
-package com.sn.libs_video.MediaMuxer;
+package com.sn.video.MediaMuxer;
 
 public class Person {
 

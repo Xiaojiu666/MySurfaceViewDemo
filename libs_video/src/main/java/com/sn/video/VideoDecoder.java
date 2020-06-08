@@ -1,4 +1,4 @@
-package com.sn.libs_video;
+package com.sn.video;
 
 import android.media.MediaCodec;
 import android.media.MediaFormat;
@@ -7,8 +7,8 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.sn.libs_video.MediaExtractor.VideoExtractor;
-import com.sn.libs_video.interfaces.IExtractor;
+import com.sn.video.MediaExtractor.VideoExtractor;
+import com.sn.video.interfaces.IExtractor;
 
 import java.nio.ByteBuffer;
 

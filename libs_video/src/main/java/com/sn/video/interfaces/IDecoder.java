@@ -1,4 +1,4 @@
-package com.sn.libs_video.interfaces;
+package com.sn.video.interfaces;
 
 import android.media.MediaFormat;
 

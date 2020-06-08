@@ -10,14 +10,11 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sn.libs_video.AudioDecoder;
-import com.sn.libs_video.DecodeState;
-import com.sn.libs_video.MediaMuxer.MP4Repack;
-import com.sn.libs_video.VideoDecoder;
+import com.sn.video.AudioDecoder;
+import com.sn.video.VideoDecoder;
 import com.yuntongxun.mysurfaceviewdemo.R;
 
 import java.io.File;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

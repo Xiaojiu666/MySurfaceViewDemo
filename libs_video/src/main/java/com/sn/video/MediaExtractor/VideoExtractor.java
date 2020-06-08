@@ -1,23 +1,22 @@
-package com.sn.libs_video.MediaExtractor;
+package com.sn.video.MediaExtractor;
 
 import android.media.MediaFormat;
 
-import com.sn.libs_video.MediaExtractor.MMExtractor;
-import com.sn.libs_video.interfaces.IExtractor;
+import com.sn.video.interfaces.IExtractor;
 
 import java.nio.ByteBuffer;
 
-public class AudioExtractor implements IExtractor {
+public class VideoExtractor implements IExtractor {
     private MMExtractor mMediaExtractor;
 
-    public AudioExtractor(String path) {
+    public VideoExtractor(String path) {
         mMediaExtractor = new MMExtractor(path);
     }
 
 
     @Override
     public MediaFormat getFormat() {
-        return mMediaExtractor.getAudioFormat();
+        return mMediaExtractor.getVideoFormat();
     }
 
     @Override

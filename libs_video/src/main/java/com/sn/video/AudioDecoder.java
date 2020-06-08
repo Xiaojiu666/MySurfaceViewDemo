@@ -1,4 +1,4 @@
-package com.sn.libs_video;
+package com.sn.video;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -7,8 +7,8 @@ import android.media.MediaCodec;
 import android.media.MediaFormat;
 import android.util.Log;
 
-import com.sn.libs_video.MediaExtractor.AudioExtractor;
-import com.sn.libs_video.interfaces.IExtractor;
+import com.sn.video.MediaExtractor.AudioExtractor;
+import com.sn.video.interfaces.IExtractor;
 
 import java.nio.ByteBuffer;
 
