@@ -21,6 +21,7 @@
         </activity>
 
         <activity android:name=".VideoPlayer.VideoActivity" />
+        <activity android:name="com.sn.study_pic.StudyAcitivity" />
     </application>
 
 </manifest>

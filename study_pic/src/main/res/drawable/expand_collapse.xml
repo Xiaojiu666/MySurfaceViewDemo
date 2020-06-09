@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--渐变，先展示A，设置时间后消失，切换成B -->
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/image_expand"></item>
+    <item android:drawable="@drawable/image_collapse"></item>
+</transition>
