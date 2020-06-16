@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LiveActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private BulletChatView bulletChatView;

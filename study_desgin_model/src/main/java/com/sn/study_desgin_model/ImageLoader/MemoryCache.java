@@ -3,6 +3,8 @@ package com.sn.study_desgin_model.ImageLoader;
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
+import com.sn.study_desgin_model.singleton.DclSingleton;
+
 public class MemoryCache implements ImageCache {
 
     private LruCache<String, Bitmap> mImageCache;

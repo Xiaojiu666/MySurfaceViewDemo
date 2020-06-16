@@ -23,6 +23,7 @@
 
         <activity android:name=".VideoPlayer.VideoActivity" />
         <activity android:name="com.sn.study_pic.StudyAcitivity" />
+        <activity android:name=".LiveActivity" />
     </application>
 
 </manifest>

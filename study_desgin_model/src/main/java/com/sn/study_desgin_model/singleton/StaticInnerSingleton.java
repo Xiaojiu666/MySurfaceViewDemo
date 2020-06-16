@@ -13,7 +13,6 @@ public class StaticInnerSingleton {
      * 线程安全、对象唯一性、延迟了单例的实例化
      */
     public StaticInnerSingleton() {
-        LayoutInflater.from().inflate()
     }
 
     public static StaticInnerSingleton getInstance() {
