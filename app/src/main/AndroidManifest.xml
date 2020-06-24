@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +27,9 @@
         <activity android:name=".VideoPlayer.VideoActivity" />
         <activity android:name="com.sn.study_pic.StudyAcitivity" />
         <activity android:name=".LiveActivity" />
+        <activity
+            android:name="com.xinruan.libs.camera.Camera2.CameraActivity"
+            android:hardwareAccelerated="true" />
     </application>
 
 </manifest>

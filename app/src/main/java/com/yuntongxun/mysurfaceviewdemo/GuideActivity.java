@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xinruan.libs.camera.Camera2.CameraActivity;
 import com.yuntongxun.mysurfaceviewdemo.VideoPlayer.VideoActivity;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class GuideActivity extends AppCompatActivity {
     private RecyclerView mGudieRecyclerView;
     private ListAdapter listAdapter;
 
-    private String[] itemTitles = new String[]{"音视频编解码", "弹幕"};
+    private String[] itemTitles = new String[]{"音视频编解码", "弹幕", "拍照"};
 
 
     @Override
@@ -49,6 +50,10 @@ public class GuideActivity extends AppCompatActivity {
                     case 1:
                         Intent intentStudy = new Intent(GuideActivity.this, LiveActivity.class);
                         startActivity(intentStudy);
+                        break;
+                    case 2:
+                        Intent intentCamera = new Intent(GuideActivity.this, CameraActivity.class);
+                        startActivity(intentCamera);
                     default:
                         break;
                 }
