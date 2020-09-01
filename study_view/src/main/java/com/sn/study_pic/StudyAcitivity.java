@@ -1,7 +1,6 @@
 package com.sn.study_pic;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.sn.customView.MyView;
-import com.sn.study_desgin_model.ImageLoader.ImageCache;
+import com.sn.customView.MyViewA;
 import com.sn.study_desgin_model.ImageLoader.ImageLoader;
-import com.sn.study_desgin_model.ImageLoader.MemoryCache;
 
 public class StudyAcitivity extends AppCompatActivity {
     @Override
@@ -62,7 +59,7 @@ public class StudyAcitivity extends AppCompatActivity {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyView myView = new MyView(getBaseContext());
+                MyViewA myView = new MyViewA(getBaseContext());
                 linearLayout.addView(myView);
                 myView.refersh();
             }

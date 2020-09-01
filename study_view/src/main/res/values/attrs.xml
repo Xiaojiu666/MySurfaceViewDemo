@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MineItemStyle">
+        <attr name="mine_item_icon" format="reference|integer" />
+        <attr name="mine_item_name" format="string" />
+        <attr name="mine_item_contant" format="string" />
+        <attr name="mine_item_show_line" format="boolean" />
+    </declare-styleable>
+</resources>

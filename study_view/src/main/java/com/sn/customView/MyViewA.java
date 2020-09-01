@@ -5,11 +5,11 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.View;
 
-public class MyView extends View {
+public class MyViewA extends View {
 
     public static final String TAG = "MyView";
 
-    public MyView(Context context) {
+    public MyViewA(Context context) {
         super(context);
     }
 

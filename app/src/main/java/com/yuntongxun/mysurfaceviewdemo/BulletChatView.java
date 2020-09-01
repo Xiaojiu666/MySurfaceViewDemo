@@ -11,6 +11,7 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.opengl.EGLContext;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -18,6 +19,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -66,10 +68,10 @@ public class BulletChatView extends SurfaceView implements Runnable, SurfaceHold
     }
 
     private void initView() {
-
         holder = getHolder();
         setZOrderOnTop(true);
         holder.addCallback(this);
+        Surface surface = holder.getSurface();
         holder.setFormat(PixelFormat.TRANSLUCENT);//使窗口支持透明度
         paint = new Paint();
         paintClear = new Paint();

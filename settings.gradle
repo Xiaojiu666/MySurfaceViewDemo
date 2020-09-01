@@ -1,2 +1,6 @@
+include ':lib_java'
+include ':study_opengles'
+include ':app:study_html'
+include ':study_thread'
 rootProject.name='MySurfaceViewDemo'
 include ':app', ':libs_common', ':libs_video', ':libs_process', ':study_view', ':study_desgin_model', ':libs_camera'

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cnai="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/first_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="4dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/first_item_image" />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.sn.ExPansionView.ExpansionItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cnai:mine_item_contant="11111111111"
+                cnai:mine_item_icon="@drawable/distinguish_scenario"
+                cnai:mine_item_name="场景" />
+
+            <com.sn.ExPansionView.ExpansionItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cnai:mine_item_contant="11111111111"
+                cnai:mine_item_icon="@drawable/distinguish_scenario"
+                cnai:mine_item_name="地点" />
+
+            <com.sn.ExPansionView.ExpansionItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cnai:mine_item_contant="11111111111"
+                cnai:mine_item_icon="@drawable/distinguish_scenario"
+                cnai:mine_item_name="文字" />
+            <!--            cnai:mine_item_contant="11111111111\n1111111\n1111111\n
+            1111111\n1111111\n1111111\n1111111\n1111111\n1111111\n1111111\n111111
+            1\n1111111\n1111111\n1111111\n1111111"-->
+
+            <com.sn.ExPansionView.ExpansionItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cnai:mine_item_contant="11111111111\n1111111\n1111111\n
+            1111111\n1111111\n1111111\n1111111\n1111111\n1111111\n1111111\n111111
+            1\n1111111\n1111111\n1111111\n1111111"
+                cnai:mine_item_icon="@drawable/distinguish_scenario"
+                cnai:mine_item_name="物体" />
+
+            <com.sn.ExPansionView.ExpansionItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cnai:mine_item_contant="11111111111"
+                cnai:mine_item_icon="@drawable/distinguish_scenario"
+                cnai:mine_item_name="时间" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
