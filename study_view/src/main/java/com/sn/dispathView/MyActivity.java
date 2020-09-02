@@ -40,13 +40,13 @@ public class MyActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "MyActivity dispatchTouchEvent");
+        Log.e(TAG, "MyActivity dispatchTouchEvent event getAction:  " + ev.getAction());
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Log.e(TAG, "MyActivity onTouchEvent");
-        return super.onTouchEvent(event);
+    public boolean onTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "MyActivity onTouchEvent event getAction:  " + ev.getAction());
+        return super.onTouchEvent(ev);
     }
 }

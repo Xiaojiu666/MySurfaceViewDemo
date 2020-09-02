@@ -29,19 +29,19 @@ public class MyViewGroup extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "MyViewGroup dispatchTouchEvent");
+        Log.e(TAG, "MyViewGroup dispatchTouchEvent event getAction:  " + ev.getAction());
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "MyViewGroup onInterceptTouchEvent");
-        return true;
+        Log.e(TAG, "MyViewGroup onInterceptTouchEvent event getAction:  " + ev.getAction());
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.e(TAG, "MyViewGroup onTouchEvent");
+        Log.e(TAG, "MyViewGroup onTouchEvent event getAction:  " + event.getAction());
         return super.onTouchEvent(event);
     }
 }
