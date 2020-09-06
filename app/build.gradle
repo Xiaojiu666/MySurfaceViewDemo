@@ -35,5 +35,5 @@ dependencies {
     implementation project(path: ':libs_video')
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     compile project(path: ':libs_process')
-    compile project(path: ':libs_camera')
+//    compile project(path: ':libs_camera')
 }

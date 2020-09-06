@@ -27,13 +27,15 @@ public class MyView extends View {
     private static final String TAG = "dispathView";
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "MyView dispatchTouchEvent event getAction:  " + ev.getAction());
+//        Log.e(TAG, "MyView dispatchTouchEvent event getAction:  " + ev.getAction());
+        Log.e(TAG, "MyView  :  dispatchTouchEvent ");
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "MyView onTouchEvent event getAction:  " + ev.getAction());
+//        Log.e(TAG, "MyView onTouchEvent event getAction:  " + ev.getAction());
+        Log.e(TAG, "MyView   :  onTouchEvent  ");
         return super.onTouchEvent(ev);
     }
 

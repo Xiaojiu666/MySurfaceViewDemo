@@ -15,9 +15,10 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        TextureView textureView = (TextureView) findViewById(R.id.textureView);
+        AutoFitTextureView textureView = (AutoFitTextureView) findViewById(R.id.textureView);
+        textureView.setAspectRatio(480,640);
 //        Window w = getWindow();
 //        w.setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
-        Camera2Manager camera2Manager = new Camera2Manager(getBaseContext(), textureView);
+        Camera2Manager camera2Manager = new Camera2Manager(this, textureView);
     }
 }
