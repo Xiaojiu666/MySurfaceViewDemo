@@ -21,19 +21,19 @@ public class MyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         MyViewGroup myViewGroup = (MyViewGroup) findViewById(R.id.my_view_group);
-        MyView myView = (MyView) findViewById(R.id.my_view);
+//        MyView myView = (MyView) findViewById(R.id.my_view);
         myViewGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(TAG, "myViewGroup onClick");
             }
         });
-        myView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "myView onClick");
-            }
-        });
+//        myView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.e(TAG, "myView onClick");
+//            }
+//        });
     }
 
     private static final String TAG = "dispathView";

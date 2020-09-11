@@ -1,34 +1,34 @@
-package com.xinruan.libs.camera.Camera2;
+package com.xinruan.libs.camera.Camera2.SurfaceView;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.SurfaceView;
 import android.view.TextureView;
 
 /**
  * Created by GuoXu on 2020/9/6 16:33.
  */
-public class AutoFitTextureView extends TextureView {
+public class AutoFitSurfaceView extends SurfaceView {
     private static final String TAG = "AutoFitTextureView";
     private int ratioWidth = 0;
     private int ratioHeight = 0;
 
-    public AutoFitTextureView(final Context context) {
+    public AutoFitSurfaceView(final Context context) {
         this(context, null);
     }
 
-    public AutoFitTextureView(final Context context, final AttributeSet attrs) {
+    public AutoFitSurfaceView(final Context context, final AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AutoFitTextureView(final Context context, final AttributeSet attrs, final int defStyle) {
+    public AutoFitSurfaceView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
     /**
-     * Sets the aspect ratio for this view. The size of the view will be measured based on the ratio
-     * calculated from the parameters. Note that the actual sizes of parameters don't matter, that is,
-     * calling setAspectRatio(2, 3) and setAspectRatio(4, 6) make the same result.
+     * 设置一个宽高，用于绘制 Holder的宽高，同时根据比例绘制当前View的 尺寸
+     * 当前 View的尺寸比例一定要满足相机支持的尺寸比，否则，预览画面将会异常
      *
      * @param width  Relative horizontal size
      * @param height Relative vertical size
@@ -39,6 +39,7 @@ public class AutoFitTextureView extends TextureView {
         }
         ratioWidth = width;
         ratioHeight = height;
+        getHolder().setFixedSize(width, height);
         requestLayout();
     }
 
@@ -55,10 +56,10 @@ public class AutoFitTextureView extends TextureView {
                 setMeasuredDimension(width, width * ratioHeight / ratioWidth);
                 Log.e(TAG, "onMeasure  width" + width + " width * ratioHeight / ratioWidth" + width * ratioHeight / ratioWidth);
             } else {
-
                 setMeasuredDimension(height * ratioWidth / ratioHeight, height);
                 Log.e(TAG, "onMeasure  height * ratioWidth / ratioHeight" + height * ratioWidth / ratioHeight + "height" + height);
             }
         }
+
     }
 }

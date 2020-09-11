@@ -13,6 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Created by GuoXu on 2020/8/23 14:22.
+ * https://blog.csdn.net/hjj378315764/article/details/79701040
  */
 public class MyRender implements GLSurfaceView.Renderer {
     private static final String TAG = "MyRender";

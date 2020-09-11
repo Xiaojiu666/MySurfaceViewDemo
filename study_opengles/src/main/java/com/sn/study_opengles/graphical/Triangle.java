@@ -165,6 +165,8 @@ public class Triangle {
 
         // 画三角形
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount);
+        GLES20.glDrawArrays(GLES20.GL_POINTS, 0, vertexCount);
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, vertexCount);
 
         // 禁用顶点数组
         GLES20.glDisableVertexAttribArray(mPositionHandle);

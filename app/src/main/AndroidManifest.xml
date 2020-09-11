@@ -28,7 +28,7 @@
         <activity android:name="com.sn.study_pic.StudyAcitivity" />
         <activity android:name=".LiveActivity" />
         <activity
-            android:name="com.xinruan.libs.camera.Camera2.CameraActivity"
+            android:name="com.xinruan.libs.camera.Camera2.SurfaceView.SurfaceViewCameraActivity"
             android:hardwareAccelerated="true" />
     </application>
 

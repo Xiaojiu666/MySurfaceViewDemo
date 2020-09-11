@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xinruan.libs.camera" >
+    package="com.xinruan.libs.camera">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -10,7 +10,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Camera2.CameraActivity">
+        <activity android:name=".Camera2.TexttureView.TexttureViewCameraActivity">
+
+        </activity>
+
+        <activity android:name=".Camera2.SurfaceView.SurfaceViewCameraActivity">
+
+        </activity>
+        <activity android:name=".Camera2.GlsurfaceView.GlViewCameraActivity">
+
+        </activity>
+
+        <activity android:name=".Camera2.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

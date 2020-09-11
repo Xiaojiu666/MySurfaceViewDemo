@@ -4,12 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <com.xinruan.libs.camera.Camera2.TexttureView.AutoFitTextureView-->
-<!--        android:id="@+id/textureView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content" />  -->
 
-    <com.xinruan.libs.camera.Camera2.SurfaceView.AutoFitSurfaceView
+    <com.xinruan.libs.camera.Camera2.TexttureView.AutoFitTextureView
         android:id="@+id/textureView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
