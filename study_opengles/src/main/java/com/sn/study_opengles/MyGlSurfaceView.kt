@@ -19,7 +19,7 @@ class MyGlSurfaceView : GLSurfaceView {
     //先执行init模块逻辑，后执行构造方法的逻辑
     init {
         setEGLContextClientVersion(2)
-        setRenderer(MyRender1())
+        setRenderer(BaseRender())
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
     }
 
@@ -29,7 +29,7 @@ class MyGlSurfaceView : GLSurfaceView {
         print("onMeasure " + width);
         Log.e("onMeasure ", width.toString());
         // 根据手机屏幕宽高设置框预览比例4:3
-        setMeasuredDimension(1080, 1080)
+//        setMeasuredDimension(640, 640);
     }
 
 

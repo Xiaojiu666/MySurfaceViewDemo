@@ -8,8 +8,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import static android.opengl.GLES20.glViewport;
-
 public class CameraDrawer {
 
     private static final String TAG = "CameraDrawer";
@@ -42,12 +40,10 @@ public class CameraDrawer {
      * 顶点贴图 : 用于相机数据绘制
      */
     private static final float VERTEXES[] = {
-//            -1, -1,
-//            -1, 1,
-//            1, 1,
-//            1, -1
-
-            -1,1,-1-1,1,-1,1,1
+            -1.0f, 1.0f,
+            -1.0f, -1.0f,
+            1.0f, -1.0f,
+            1.0f, 1.0f,
     };
 
     // 后置摄像头使用的纹理坐标
@@ -57,24 +53,11 @@ public class CameraDrawer {
 //            1.0f, 0.0f,
 //            0.0f, 0.0f,
 //    };
-    /**
-     * 纹理贴图 : 用于相机数据绘制
-     */
     private static final float TEXTURE_BACK[] = {
-            1f, 0.0f,
-            1f, 1f,
-            0f, 1f,
             0.0f, 0f,
-    };
-
-    /**
-     * 纹理贴图 : 用于相机数据绘制
-     */
-    private static final float TEXTURE_LEFT[] = {
-            1f, 0.0f,
+            1.0f, 0.0f,
             1f, 1f,
-            0f, 1f,
-            0.0f, 0f,
+            0f, 1.0f,
     };
 
     // 前置摄像头使用的纹理坐标
@@ -109,11 +92,10 @@ public class CameraDrawer {
         mProgram = createProgram(VERTEX_SHADER, FRAGMENT_SHADER);
         mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
         mTextureHandle = GLES20.glGetAttribLocation(mProgram, "inputTextureCoordinate");
-        GLES20.glViewport(0, 0, 2960, 1440);
-
     }
 
     public void draw(int texture, boolean isFrontCamera) {
+
         GLES20.glUseProgram(mProgram); // 指定使用的program
         GLES20.glEnable(GLES20.GL_CULL_FACE); // 启动剔除
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);

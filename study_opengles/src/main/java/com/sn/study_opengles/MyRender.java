@@ -28,11 +28,11 @@ public class MyRender implements GLSurfaceView.Renderer {
             " }";
 
     float triangleCoords[] = {
-            0f, 0.5f, 0.0f, // top
-            -0.5f, -0.5f, 0.0f, // bottom left
-            0.5f, -0.5f, 0.0f  // bottom right
+            0f, 0.5f, 0.F,// top
+            -0.5f, -0.5f, 0.F, // bottom left
+            0.5f, -0.5f, 0.F, // bottom right
     };
-    float color[] = {1.0f, 1.0f, 1.0f, 1.0f}; //白色
+    float color[] = {1.0f, 0f, 0f, 1f}; //白色
     private FloatBuffer vertexBuffer;
     private int mProgram;
     private int mPositionHandle;
@@ -41,7 +41,7 @@ public class MyRender implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         //将背景设置为灰色
-        GLES20.glClearColor(0f, 0f, 0f, 1.9f);
+        GLES20.glClearColor(1f, 0f, 0f, 1.0f);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         //申请底层空间B
         // yteBuffer提供了两种静态实例方式：
