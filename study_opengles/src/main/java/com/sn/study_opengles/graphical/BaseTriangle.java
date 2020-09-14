@@ -120,7 +120,7 @@ public class BaseTriangle {
         // get handle to shape's transformation matrix
         vPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
 
-        // Pass the projection and view transformation to the shader
+        //将投影和视图变换传递给着色器
         GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mvpMatrix, 0);
 
         // Draw the triangle

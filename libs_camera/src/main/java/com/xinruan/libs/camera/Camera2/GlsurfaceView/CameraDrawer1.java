@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-public class CameraDrawer {
+public class CameraDrawer1 {
 
     private static final String TAG = "CameraDrawer";
     private final String VERTEX_SHADER = "" +
@@ -40,10 +40,10 @@ public class CameraDrawer {
      * 顶点贴图 : 用于相机数据绘制
      */
     private static final float VERTEXES[] = {
-            -1.0f, 1.0f,
-            -1.0f, -1.0f,
-            0f, -1.0f,
             0f, 1.0f,
+            0f, -1.0f,
+            1f, -1.0f,
+            1f, 1.0f,
     };
 
     // 后置摄像头使用的纹理坐标
@@ -82,7 +82,7 @@ public class CameraDrawer {
     private final int VERTEX_SIZE = 2;
     private final int VERTEX_STRIDE = VERTEX_SIZE * 4;
 
-    public CameraDrawer() {
+    public CameraDrawer1() {
         // init float buffer for vertex coordinates
         // 将JAVA的 数组转换成ByteBUffer
         mVertexBuffer = ByteBuffer.allocateDirect(VERTEXES.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
@@ -104,6 +104,7 @@ public class CameraDrawer {
     }
 
     public void draw(int texture, boolean isFrontCamera) {
+
         GLES20.glUseProgram(mProgram); // 指定使用的program
         GLES20.glEnable(GLES20.GL_CULL_FACE); // 启动剔除
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
