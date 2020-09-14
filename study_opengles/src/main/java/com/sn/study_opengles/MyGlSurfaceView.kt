@@ -20,7 +20,8 @@ class MyGlSurfaceView : GLSurfaceView {
     init {
         setEGLContextClientVersion(2)
         setRenderer(BaseRender())
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
+//        该设置可防止系统在您调用 requestRender() 之前重新绘制 GLSurfaceView 帧，这对于此示例应用而言更为高效。
+//        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
