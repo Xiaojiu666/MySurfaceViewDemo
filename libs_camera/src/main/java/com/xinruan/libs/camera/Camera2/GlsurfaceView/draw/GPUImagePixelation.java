@@ -1,33 +1,52 @@
-package com.xinruan.libs.camera.Camera2.GlsurfaceView;
+package com.xinruan.libs.camera.Camera2.GlsurfaceView.draw;
 
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.util.Log;
 
+import com.xinruan.libs.camera.Camera2.OpenGlUtils;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-public class CameraDrawer {
+/**
+ * Created by GuoXu on 2020/9/14 19:32.
+ */
+public class GPUImagePixelation {
 
     private static final String TAG = "CameraDrawer";
     private final String VERTEX_SHADER = "" +
-            "attribute vec4 vPosition;" +
-            "attribute vec2 inputTextureCoordinate;" +
-            "varying vec2 textureCoordinate;" +
-            "void main()" +
-            "{" +
-            "gl_Position = vPosition;" +
-            "textureCoordinate = inputTextureCoordinate;" +
+            "attribute vec4 position;\n" +
+            "attribute vec4 inputTextureCoordinate;\n" +
+            " \n" +
+            "varying vec2 textureCoordinate;\n" +
+            " \n" +
+            "void main()\n" +
+            "{\n" +
+            "    gl_Position = position;\n" +
+            "    textureCoordinate = inputTextureCoordinate.xy;\n" +
             "}";
     private final String FRAGMENT_SHADER = "" +
-            "#extension GL_OES_EGL_image_external : require\n" +
-            "precision mediump float;" +
+            "precision highp float;\n" +
+
             "varying vec2 textureCoordinate;\n" +
-            "uniform samplerExternalOES s_texture;\n" +
-            "void main() {" +
-            "  gl_FragColor = texture2D( s_texture, textureCoordinate );\n" +
+
+            "uniform float imageWidthFactor;\n" +
+            "uniform float imageHeightFactor;\n" +
+            "uniform sampler2D inputImageTexture;\n" +
+            "uniform float pixel;\n" +
+
+            "void main()\n" +
+            "{\n" +
+            "  vec2 uv  = textureCoordinate.xy;\n" +
+            "  float dx = pixel * imageWidthFactor;\n" +
+            "  float dy = pixel * imageHeightFactor;\n" +
+            "  vec2 coord = vec2(dx * floor(uv.x / dx), dy * floor(uv.y / dy));\n" +
+            "  vec3 tc = texture2D(inputImageTexture, coord).xyz;\n" +
+            "  gl_FragColor = vec4(tc, 1.0);\n" +
             "}";
+    private final int glUniformTexture;
 
     private FloatBuffer mVertexBuffer;
     private FloatBuffer mBackTextureBuffer;
@@ -36,6 +55,8 @@ public class CameraDrawer {
     private int mProgram;
     private int mPositionHandle;
     private int mTextureHandle;
+    private float pixel = 1.0f;
+
     /**
      * 顶点贴图 : 用于相机数据绘制
      * 顶点和纹理坐标 数据进行对应 个数必须相等
@@ -84,8 +105,11 @@ public class CameraDrawer {
 
     private final int VERTEX_SIZE = 2;
     private final int VERTEX_STRIDE = VERTEX_SIZE * 4;
+    private int imageWidthFactorLocation;
+    private int imageHeightFactorLocation;
+    private int pixelLocation;
 
-    public CameraDrawer() {
+    public GPUImagePixelation() {
         // init float buffer for vertex coordinates
         // 将JAVA的 数组转换成ByteBUffer
         mVertexBuffer = ByteBuffer.allocateDirect(VERTEXES.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
@@ -102,53 +126,40 @@ public class CameraDrawer {
         mDrawListBuffer.put(VERTEX_ORDER).position(0);
 
         mProgram = createProgram(VERTEX_SHADER, FRAGMENT_SHADER);
-        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
+        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "position");
+        glUniformTexture = GLES20.glGetUniformLocation(mProgram, "inputImageTexture");
         mTextureHandle = GLES20.glGetAttribLocation(mProgram, "inputTextureCoordinate");
+        imageWidthFactorLocation = GLES20.glGetUniformLocation(mProgram, "imageWidthFactor");
+        imageHeightFactorLocation = GLES20.glGetUniformLocation(mProgram, "imageHeightFactor");
+        pixelLocation = GLES20.glGetUniformLocation(mProgram, "pixel");
     }
 
-    public void draw(int texture, boolean isFrontCamera) {
+    public void onOutputSizeChanged(final int width, final int height) {
+        setFloat(imageWidthFactorLocation, 1.0f / width);
+        setFloat(imageHeightFactorLocation, 1.0f / height);
+    }
+
+    protected void setFloat(final int location, final float floatValue) {
+        GLES20.glUniform1f(location, floatValue);
+    }
+
+    public void draw(int texture) {
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
         GLES20.glUseProgram(mProgram); // 指定使用的program
         GLES20.glEnable(GLES20.GL_CULL_FACE); // 启动剔除
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture); // 绑定纹理
         GLES20.glEnableVertexAttribArray(mPositionHandle);
-        GLES20.glVertexAttribPointer(mPositionHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mVertexBuffer);
         GLES20.glEnableVertexAttribArray(mTextureHandle);
         GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mBackTextureBuffer);
 
-//        if (isFrontCamera) {
-//            GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mFrontTextureBuffer);
-//        } else {
-//
-//        }
         // 真正绘制的操作
-        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
-
+//        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
         GLES20.glDisableVertexAttribArray(mPositionHandle);
         GLES20.glDisableVertexAttribArray(mTextureHandle);
     }
 
-    public void draw2(int texture, boolean isFrontCamera) {
-        GLES20.glUseProgram(mProgram); // 指定使用的program
-        GLES20.glEnable(GLES20.GL_CULL_FACE); // 启动剔除
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture); // 绑定纹理
-        GLES20.glEnableVertexAttribArray(mPositionHandle);
-        GLES20.glVertexAttribPointer(mPositionHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mVertexBuffer);
-        GLES20.glEnableVertexAttribArray(mTextureHandle);
-        GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mBackTextureBuffer);
-
-//        if (isFrontCamera) {
-//            GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mFrontTextureBuffer);
-//        } else {
-//
-//        }
-        // 真正绘制的操作
-        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
-
-        GLES20.glDisableVertexAttribArray(mPositionHandle);
-        GLES20.glDisableVertexAttribArray(mTextureHandle);
-    }
 
     public static int createProgram(String vertexSource, String fragmentSource) {
         // 1. load shader

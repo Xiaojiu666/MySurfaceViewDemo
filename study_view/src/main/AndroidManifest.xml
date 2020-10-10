@@ -22,16 +22,24 @@
 
         </activity>
         <activity android:name="com.sn.dispathView.MyActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name="com.sn.cornerImage.MainActivity" >
 
 
+        </activity>
+
+        <activity android:name="com.bitmap.ChangeColorActivity">
+
+        </activity>
+
+        <activity android:name="com.sn.activity.CustomViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>

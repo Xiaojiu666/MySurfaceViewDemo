@@ -6,4 +6,137 @@
         <attr name="mine_item_contant" format="string" />
         <attr name="mine_item_show_line" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="EmptyLayout">
+        <attr name="elEmptyLayout" format="reference" />
+        <attr name="elErrorLayout" format="reference" />
+        <attr name="elLoadingLayout" format="reference" />
+        <attr name="elNoNetWorkLayout" format="reference" />
+        <attr name="elEmptyLayoutType" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="StatusBarHeightView">
+        <attr name="use_type" format="integer">
+            <enum name="use_height" value="0" />
+            <enum name="use_padding_top" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="SwitchView">
+        <attr name="hasShadow" format="boolean" />
+        <attr name="primaryColor" format="color" />
+        <attr name="primaryColorDark" format="color" />
+        <attr name="offColor" format="color" />
+        <attr name="offColorDark" format="color" />
+        <attr name="barColor" format="color" />
+        <attr name="bgColor" format="color" />
+        <attr name="shadowColor" format="color" />
+        <attr name="ratioAspect" format="float" />
+        <attr name="isOpened" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="StickyScrollView">
+        <attr name="stuckShadowHeight" format="dimension" />
+        <attr name="stuckShadowDrawable" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="CaterpillarIndicator">
+        <attr name="slide_text_color" format="color|reference" />
+        <attr name="slide_text_size_normal" format="dimension" />
+        <attr name="slide_text_size_selected" format="dimension" />
+        <attr name="slide_text_color_normal" format="color" />
+        <attr name="slide_text_color_selected" format="color" />
+        <attr name="slide_footer_line_height" format="dimension" />
+        <attr name="slide_footer_color" format="color" />
+        <attr name="slide_round" format="boolean" />
+        <attr name="slide_item_width" format="dimension" />
+        <attr name="slide_caterpillar" format="boolean" />
+        <attr name="slide_count" format="integer" />
+        <attr name="slide_padding_bottom" format="dimension" />
+        <attr name="slide_text_center_flag">
+            <enum name="textCenter" value="0" />
+            <enum name="lineCenter" value="1" />
+        </attr>
+
+    </declare-styleable>
+    <declare-styleable name="CircleProgressBar">
+        <attr name="line_count" format="integer|reference" />
+        <attr name="line_width" format="dimension|reference" />
+        <attr name="progress_start_color" format="color|reference" />
+        <attr name="progress_end_color" format="color|reference" />
+        <attr name="progress_text_color" format="color|reference" />
+        <attr name="progress_text_size" format="dimension|reference" />
+        <attr name="progress_stroke_width" format="dimension|reference" />
+        <attr name="progress_background_color" format="color|reference" />
+        <attr name="progress_start_degree" format="integer|reference" />
+        <attr name="drawBackgroundOutsideProgress" format="boolean|reference" />
+        <attr name="style">
+            <enum name="line" value="0" />
+            <enum name="solid" value="1" />
+            <enum name="solid_line" value="2" />
+        </attr>
+        <attr name="progress_shader">
+            <enum name="linear" value="0" />
+            <enum name="radial" value="1" />
+            <enum name="sweep" value="2" />
+        </attr>
+        <attr name="progress_stroke_cap">
+            <enum name="butt" value="0" />
+            <enum name="round" value="1" />
+            <enum name="square" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RoundProgressView">
+        <!--文字大小-->
+        <attr name="textsize" format="dimension"/>
+        <!--文字颜色-->
+        <attr name="textcolor" format="color"/>
+        <!--文本-->
+        <attr name="texts" format="string"/>
+        <!--变宽宽度-->
+        <attr name="stroke_width" format="integer"/>
+        <!--未走的进度的颜色-->
+        <attr name="normal_color" format="color"/>
+        <!--已走的进度的颜色-->
+        <attr name="progresscolor" format="color"/>
+        <!--已走的进度 0-360 -->
+        <attr name="progress" format="integer"/>
+        <!--类型 填充型，还是环形-->
+        <attr name="progress_style" format="enum">
+            <enum name="STROKE" value="0"/>
+            <enum name="FILL" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AlbumImageView">
+        <attr name="alb_xOffset" format="float" />
+        <attr name="alb_yOffset" format="float" />
+        <attr name="alb_border_icon" format="reference" />
+        <attr name="alb_base_map_icon" format="reference" />
+        <attr name="alb_icon" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="GradientButton">
+        <attr name="button_text" format="string" />
+        <attr name="button_size" format="dimension" />
+        <attr name="button_text_color" format="color" />
+        <attr name="button_start_color" format="color" />
+        <attr name="button_end_color" format="color" />
+        <attr name="button_press_start_color" format="color" />
+        <attr name="button_press_end_color" format="color" />
+        <attr name="button_gradient_orientation">
+            <enum name="TOP_BOTTOM" value="0" />
+            <enum name="TR_BL" value="1" />
+            <enum name="RIGHT_LEFT" value="2" />
+            <enum name="BR_TL" value="3" />
+            <enum name="BOTTOM_TOP" value="4" />
+            <enum name="BL_TR" value="5" />
+            <enum name="LEFT_RIGHT" value="6" />
+            <enum name="TL_BR" value="7" />
+        </attr>
+        <attr name="button_radius" format="dimension" />
+        <attr name="button_shadow_distance" format="dimension" />
+        <attr name="button_shadow_angle" format="integer" />
+        <attr name="button_shadow_color" format="color" />
+        <attr name="button_is_shadowed" format="boolean" />
+        <attr name="button_shadow_radius" format="dimension" />
+    </declare-styleable>
 </resources>

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,6 +24,12 @@ import com.xinruan.libs.camera.R;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "MainActivity";
+
+//    static {
+//        System.loadLibrary("native-lib");
+//    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +41,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textureView.setOnClickListener(this);
         surfaceView.setOnClickListener(this);
         glview.setOnClickListener(this);
+//        Log.e(TAG, stringFromJNI());
     }
+
+    /**
+     * A native method that is implemented by the 'native-lib' native library,
+     * which is packaged with this application.
+     */
+    public native String stringFromJNI();
 
     /**
      * 权限检查
@@ -48,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+
     //检查和申请权限
     private void requestPermission(Activity mContext) {
         //把需要检查的一组权限放在一个字符串数组里
