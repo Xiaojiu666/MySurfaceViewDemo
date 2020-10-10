@@ -20,8 +20,8 @@ public class CustomViewActivity extends AppCompatActivity {
         RoundProgressView rpv1 = (RoundProgressView) findViewById(R.id.rpv1);
         RoundProgressView rpv2 = (RoundProgressView) findViewById(R.id.rpv2);
         RoundProgressView rpv3 = (RoundProgressView) findViewById(R.id.rpv3);
-        rpv1.setPercent(360);
-        rpv2.setNumerical(95);
-        rpv3.setPercent(90);
+        rpv1.setNumerical(1);
+        rpv2.setNumerical(25);
+        rpv3.setNumerical(50);
     }
 }

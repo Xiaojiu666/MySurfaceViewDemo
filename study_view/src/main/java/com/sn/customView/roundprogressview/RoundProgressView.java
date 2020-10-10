@@ -37,7 +37,6 @@ public class RoundProgressView extends View {
     private static final int CIRCLE_STROKE = 40;//线条宽度
     private static final float PERCENT_CIRCLE_START_ANGLE = 90;//起始角度
     private static final Paint.Style progress_style = Paint.Style.STROKE;//填充式还是环形式
-    private float textSize = 20;//文字大小
     private int percent = 90;//进度条
     private RectF rectF = new RectF();
 
@@ -52,7 +51,7 @@ public class RoundProgressView extends View {
     public RoundProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundProgressView);
-        textSize = array.getDimension(R.styleable.RoundProgressView_textsize, textSize);
+//        textSize = array.getDimension(R.styleable.RoundProgressView_textsize, textSize);
 //        strokeWidth = array.getInteger(R.styleable.RoundProgressView_stroke_width, CIRCLE_STROKE);
         mBgCircleColor = array.getColor(R.styleable.RoundProgressView_normal_color, mBgCircleColor);
 //        mPercentCircleColor = array.getColor(R.styleable.RoundProgressView_mPercentCircleColor, mPercentCircleColor);
@@ -114,12 +113,16 @@ public class RoundProgressView extends View {
         if (percent > 0) {
             initRctfF(padding);
             float STROKE_RADIUS = (float) CIRCLE_STROKE / 2;
-            float deviationAngle = clcaTan(STROKE_RADIUS, radiusH - CIRCLE_PADDING - STROKE_RADIUS);
-            float v = clacStartArcLocation(radius);
-            float v1 = clacStartArcY(radius);
-            canvas.drawArc(rectF, PERCENT_CIRCLE_START_ANGLE + deviationAngle, percent - deviationAngle, progress_style == Paint.Style.FILL, mPercentCirclePaint);
-            canvas.drawCircle(radiusW - STROKE_RADIUS + v, viewHeight - (CIRCLE_PADDING + CIRCLE_STROKE), STROKE_RADIUS, mTestPaint);
-//            canvas.drawCircle(radiusW - STROKE_RADIUS + v, viewHeight - (CIRCLE_PADDING + CIRCLE_STROKE), STROKE_RADIUS, mTestPaint);
+            float deviationAngle = clcaTan(STROKE_RADIUS, radius - STROKE_RADIUS / 2);
+//            float v = clacStartArcLocation(radius);
+//            float v1 = clacStartArcY(radius);
+            float startAngle = PERCENT_CIRCLE_START_ANGLE + deviationAngle;
+            float sweepAngle = percent;
+            canvas.drawArc(rectF, startAngle, sweepAngle, progress_style == Paint.Style.FILL, mPercentCirclePaint);
+            canvas.drawCircle(radiusW - STROKE_RADIUS, viewHeight - CIRCLE_STROKE, STROKE_RADIUS, mTestPaint);
+            double sin = Math.sin(sweepAngle);
+            double cos = Math.cos(sweepAngle);
+            canvas.drawCircle(radiusW - (float) sin * radiusW, radiusH- (float) cos * radiusW, STROKE_RADIUS, mTestPaint);
         }
         canvas.drawLine(viewWidth / 2, 0, viewWidth / 2, viewHeight, mTestPaint);
     }
@@ -186,6 +189,26 @@ public class RoundProgressView extends View {
         Log.e(TAG, "tan " + 180 * tan / Math.PI);
         return (float) (180 * tan / Math.PI);
     }
+
+//    public float clcSin(double x, double y) {
+//        if (x < 0 || y < 0) {
+//            return 0;
+//        }
+//        double tan = Math.asin(x, y);
+//        Log.e(TAG, "tan " + tan);
+//        Log.e(TAG, "tan " + 180 * tan / Math.PI);
+//        return (float) (180 * tan / Math.PI);
+//    }
+//
+//    public float clcaTan(double x, double y) {
+//        if (x < 0 || y < 0) {
+//            return 0;
+//        }
+//        double tan = Math.atan2(x, y);
+//        Log.e(TAG, "tan " + tan);
+//        Log.e(TAG, "tan " + 180 * tan / Math.PI);
+//        return (float) (180 * tan / Math.PI);
+//    }
 
 
 }
