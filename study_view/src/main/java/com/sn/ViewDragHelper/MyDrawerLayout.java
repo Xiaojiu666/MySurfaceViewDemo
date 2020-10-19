@@ -114,6 +114,8 @@ public class MyDrawerLayout extends LinearLayout {
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             //mAutoBackView手指释放时可以自动回去
             if (releasedChild == mAutoBackView) {
+                Log.e(TAG,"x : " +mAutoBackOriginPos.x);
+                Log.e(TAG,"y : " +mAutoBackOriginPos.y);
                 //该方法与smoothSlideViewTo所实现的效果是一样的，区别在于smoothSlideViewTo（）是指定一个子View，
                 // 而settleCapturedViewAt（）是在ViewDragHelper.Callback的onViewReleased（）方法中获取当前释放的子View，然后实现手势惯性的效果。
                 viewDragHelper.settleCapturedViewAt(mAutoBackOriginPos.x, mAutoBackOriginPos.y);

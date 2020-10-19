@@ -19,7 +19,11 @@
 
         </activity>
         <activity android:name="com.sn.ViewDragHelper.BottomDrawerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.sn.dispathView.MyActivity">
 
@@ -35,19 +39,11 @@
         </activity>
 
         <activity android:name="com.sn.activity.CustomViewActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name="com.customRecyclerView.RecyclerViewActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>/
     </application>
 </manifest>
