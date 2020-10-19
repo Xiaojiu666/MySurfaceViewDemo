@@ -1,6 +1,5 @@
 package com.sn.customView.roundprogressview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,14 +9,10 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-
 
 import androidx.annotation.IntRange;
 
 import com.sn.study_pic.R;
-
-import static android.graphics.Paint.Style.STROKE;
 
 /**
  * @author cici$
@@ -34,8 +29,8 @@ public class RoundProgressView extends View {
     private static final int DEFAULT_WIDTH = 300;
     private static final int DEFAULT_HEIGHT = 300;
     private static final int CIRCLE_PADDING = 0;
-    private static final int CIRCLE_STROKE = 40;//线条宽度
-    private static final float PERCENT_CIRCLE_START_ANGLE = 90;//起始角度
+    private static final int CIRCLE_STROKE = 72;//线条宽度
+    private static final float DEVIATIONANGLE = 7.2f;   //顶部圆弧偏移量
     private static final Paint.Style progress_style = Paint.Style.STROKE;//填充式还是环形式
     private int percent = 90;//进度条
     private RectF rectF = new RectF();
@@ -75,6 +70,7 @@ public class RoundProgressView extends View {
         mPercentCirclePaint.setStyle(progress_style);  //设置画笔模式为描边
         mPercentCirclePaint.setStrokeWidth(CIRCLE_STROKE);         //设置画笔宽度为10px
         mPercentCirclePaint.setAntiAlias(true); // 抗锯齿
+        mPercentCirclePaint.setStrokeCap(Paint.Cap.ROUND);
 
         mTestPaint = new Paint();
         mTestPaint.setColor(Color.RED);
@@ -105,25 +101,32 @@ public class RoundProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int padding = CIRCLE_PADDING + CIRCLE_STROKE;
+        int padding = CIRCLE_PADDING + CIRCLE_STROKE / 2;
         float radiusW = (float) viewWidth / 2;
         float radiusH = (float) viewHeight / 2;
+        Log.e(TAG, "radiusW : " + radiusW);
         float radius = radiusW - padding;
+        Log.e(TAG, "radius : " + radius);
         canvas.drawCircle(radiusW, radiusH, radius, mBgCirclePaint);
         if (percent > 0) {
             initRctfF(padding);
-            float STROKE_RADIUS = (float) CIRCLE_STROKE / 2;
-            float deviationAngle = clcaTan(STROKE_RADIUS, radius - STROKE_RADIUS / 2);
-//            float v = clacStartArcLocation(radius);
-//            float v1 = clacStartArcY(radius);
-            float startAngle = PERCENT_CIRCLE_START_ANGLE + deviationAngle;
-            float sweepAngle = percent;
+            float v = clcaTan((float) CIRCLE_STROKE / 2, radiusW - (float) CIRCLE_STROKE / 2);
+            float startAngle = 90 + v;
+            float sweepAngle;
+            if (percent == 360) {
+                sweepAngle = percent;
+            } else {
+                sweepAngle = percent - v * 2;
+            }
+            //避免分数低于圆弧偏移量时，起始角度出现问题
+            if (sweepAngle < 0) {
+                sweepAngle = percent;
+            }
+            Log.e(TAG, "startAngle : " + startAngle + "sweepAngle : " + sweepAngle);
+            Log.e(TAG, "percent : " + percent);
             canvas.drawArc(rectF, startAngle, sweepAngle, progress_style == Paint.Style.FILL, mPercentCirclePaint);
-            canvas.drawCircle(radiusW - STROKE_RADIUS, viewHeight - CIRCLE_STROKE, STROKE_RADIUS, mTestPaint);
-            double sin = Math.sin(sweepAngle);
-            double cos = Math.cos(sweepAngle);
-            canvas.drawCircle(radiusW - (float) sin * radiusW, radiusH- (float) cos * radiusW, STROKE_RADIUS, mTestPaint);
         }
+        //辅助线
         canvas.drawLine(viewWidth / 2, 0, viewWidth / 2, viewHeight, mTestPaint);
     }
 

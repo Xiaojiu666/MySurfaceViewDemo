@@ -21,7 +21,7 @@ public class CustomViewActivity extends AppCompatActivity {
         RoundProgressView rpv2 = (RoundProgressView) findViewById(R.id.rpv2);
         RoundProgressView rpv3 = (RoundProgressView) findViewById(R.id.rpv3);
         rpv1.setNumerical(1);
-        rpv2.setNumerical(25);
-        rpv3.setNumerical(50);
+        rpv2.setNumerical(75);
+        rpv3.setNumerical(100);
     }
 }
