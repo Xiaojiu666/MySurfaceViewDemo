@@ -10,8 +10,8 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sn.video.AudioDecoder;
-import com.sn.video.VideoDecoder;
+import com.view.video.AudioDecoder;
+import com.view.video.VideoDecoder;
 import com.yuntongxun.mysurfaceviewdemo.R;
 
 import java.io.File;

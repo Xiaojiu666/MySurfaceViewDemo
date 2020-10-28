@@ -25,7 +25,7 @@
         </activity>
 
         <activity android:name=".VideoPlayer.VideoActivity" />
-        <activity android:name="com.sn.study_pic.StudyAcitivity" />
+        <activity android:name="com.view.study_pic.StudyAcitivity" />
         <activity android:name=".LiveActivity" />
         <activity
             android:name="com.xinruan.libs.camera.Camera2.SurfaceView.SurfaceViewCameraActivity"

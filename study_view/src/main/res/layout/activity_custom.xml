@@ -4,20 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.sn.customView.roundprogressview.RoundProgressView
+    <com.view.customView.roundprogressview.RoundProgressView
         android:background="#000"
         android:id="@+id/rpv1"
         android:layout_width="166dp"
         android:layout_height="166dp"
         android:layout_weight="1" />
 
-    <com.sn.customView.roundprogressview.RoundProgressView
+    <com.view.customView.roundprogressview.RoundProgressView
         android:id="@+id/rpv2"
         android:layout_width="166dp"
         android:layout_height="166dp"
         android:layout_weight="1" />
 
-    <com.sn.customView.roundprogressview.RoundProgressView
+    <com.view.customView.roundprogressview.RoundProgressView
         android:id="@+id/rpv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

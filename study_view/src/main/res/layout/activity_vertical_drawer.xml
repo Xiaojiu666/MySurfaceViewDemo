@@ -22,7 +22,7 @@
     </LinearLayout>
 
 
-    <com.sn.customView.VerticalDrawerLayout
+    <com.view.customView.VerticalDrawerLayout
         android:id="@+id/vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -55,6 +55,6 @@
                 android:textSize="30sp"/>
         </LinearLayout>
 
-    </com.sn.customView.VerticalDrawerLayout>
+    </com.view.customView.VerticalDrawerLayout>
 
 </LinearLayout>

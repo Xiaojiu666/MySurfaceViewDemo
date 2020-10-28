@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+    <declare-styleable name="GradienTextView">
+
+        <attr name="original_color" format="color"/>
+        <attr name="change_color" format="color"/>
+
+    </declare-styleable>
+
     <declare-styleable name="MineItemStyle">
         <attr name="mine_item_icon" format="reference|integer" />
         <attr name="mine_item_name" format="string" />
@@ -38,25 +47,7 @@
         <attr name="stuckShadowHeight" format="dimension" />
         <attr name="stuckShadowDrawable" format="reference" />
     </declare-styleable>
-    <declare-styleable name="CaterpillarIndicator">
-        <attr name="slide_text_color" format="color|reference" />
-        <attr name="slide_text_size_normal" format="dimension" />
-        <attr name="slide_text_size_selected" format="dimension" />
-        <attr name="slide_text_color_normal" format="color" />
-        <attr name="slide_text_color_selected" format="color" />
-        <attr name="slide_footer_line_height" format="dimension" />
-        <attr name="slide_footer_color" format="color" />
-        <attr name="slide_round" format="boolean" />
-        <attr name="slide_item_width" format="dimension" />
-        <attr name="slide_caterpillar" format="boolean" />
-        <attr name="slide_count" format="integer" />
-        <attr name="slide_padding_bottom" format="dimension" />
-        <attr name="slide_text_center_flag">
-            <enum name="textCenter" value="0" />
-            <enum name="lineCenter" value="1" />
-        </attr>
 
-    </declare-styleable>
     <declare-styleable name="CircleProgressBar">
         <attr name="line_count" format="integer|reference" />
         <attr name="line_width" format="dimension|reference" />
@@ -87,23 +78,23 @@
 
     <declare-styleable name="RoundProgressView">
         <!--文字大小-->
-        <attr name="textsize" format="dimension"/>
+        <attr name="textsize" format="dimension" />
         <!--文字颜色-->
-        <attr name="textcolor" format="color"/>
+        <attr name="textcolor" format="color" />
         <!--文本-->
-        <attr name="texts" format="string"/>
+        <attr name="texts" format="string" />
         <!--变宽宽度-->
-        <attr name="stroke_width" format="integer"/>
+        <attr name="stroke_width" format="integer" />
         <!--未走的进度的颜色-->
-        <attr name="normal_color" format="color"/>
+        <attr name="normal_color" format="color" />
         <!--已走的进度的颜色-->
-        <attr name="progresscolor" format="color"/>
+        <attr name="progresscolor" format="color" />
         <!--已走的进度 0-360 -->
-        <attr name="progress" format="integer"/>
+        <attr name="progress" format="integer" />
         <!--类型 填充型，还是环形-->
         <attr name="progress_style" format="enum">
-            <enum name="STROKE" value="0"/>
-            <enum name="FILL" value="1"/>
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
         </attr>
     </declare-styleable>
 
@@ -114,6 +105,8 @@
         <attr name="alb_base_map_icon" format="reference" />
         <attr name="alb_icon" format="reference" />
     </declare-styleable>
+
+
     <declare-styleable name="GradientButton">
         <attr name="button_text" format="string" />
         <attr name="button_size" format="dimension" />
@@ -139,4 +132,24 @@
         <attr name="button_is_shadowed" format="boolean" />
         <attr name="button_shadow_radius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="CaterpillarIndicator">
+        <attr name="slide_text_color" format="color|reference" />
+        <attr name="slide_text_size_normal" format="dimension" />
+        <attr name="slide_text_size_selected" format="dimension" />
+        <attr name="slide_text_color_normal" format="color" />
+        <attr name="slide_text_color_selected" format="color" />
+        <attr name="slide_footer_line_height" format="dimension" />
+        <attr name="slide_footer_color" format="color" />
+        <attr name="slide_round" format="boolean" />
+        <attr name="slide_item_width" format="dimension" />
+        <attr name="slide_caterpillar" format="boolean" />
+        <attr name="slide_count" format="integer" />
+        <attr name="slide_padding_bottom" format="dimension" />
+        <attr name="slide_text_center_flag">
+            <enum name="textCenter" value="0" />
+            <enum name="lineCenter" value="1" />
+        </attr>
+    </declare-styleable>
+
 </resources>

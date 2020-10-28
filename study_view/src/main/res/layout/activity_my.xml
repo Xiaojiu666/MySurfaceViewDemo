@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sn.dispathView.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+<com.view.dispathView.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/my_view_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sn.CircleView
+    <com.view.CircleView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -14,4 +14,4 @@
     <!--        android:layout_height="300dp"-->
     <!--        android:background="#f0f" />-->
 
-</com.sn.dispathView.MyViewGroup>
+</com.view.dispathView.MyViewGroup>

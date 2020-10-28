@@ -7,7 +7,7 @@
     android:background="#fff"
     tools:context=".MainActivity">
 
-    <com.sn.study_opengles.MyGlSurfaceView
+    <com.view.study_opengles.first.TriangleGlSurfaceView
         android:id="@+id/gls_face"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sn.ExPansionView.ExpansionLayout
+    <com.view.ExPansionView.ExpansionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +20,6 @@
             android:textColor="@color/white" />
 
         <include layout="@layout/second_view" />
-    </com.sn.ExPansionView.ExpansionLayout>
+    </com.view.ExPansionView.ExpansionLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

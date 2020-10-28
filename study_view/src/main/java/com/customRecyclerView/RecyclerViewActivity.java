@@ -4,10 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sn.study_pic.R;
+
 
 /**
  * Created by GuoXu on 2020/10/19 9:33.
