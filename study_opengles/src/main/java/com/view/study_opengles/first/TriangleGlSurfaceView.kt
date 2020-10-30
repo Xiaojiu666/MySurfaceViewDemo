@@ -3,6 +3,7 @@ package com.view.study_opengles.first
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
+import com.view.study_opengles.first.test.DoubleTriangleRender
 
 /**
  * Created by GuoXu on 2020/10/26 9:53.
@@ -14,6 +15,6 @@ class TriangleGlSurfaceView : GLSurfaceView {
 
     init {
         setEGLContextClientVersion(2)
-        setRenderer(SquareRender())
+        setRenderer(DoubleTriangleRender())
     }
 }
