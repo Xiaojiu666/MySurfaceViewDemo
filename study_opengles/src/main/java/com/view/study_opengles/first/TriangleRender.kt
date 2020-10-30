@@ -19,11 +19,11 @@ class TriangleRender : GLSurfaceView.Renderer {
             "  gl_Position = vPosition;" +
             "}"
 
-    // 1. 顶点
+    // 1. 顶点数组
     var vertices = floatArrayOf(
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
+            0.5f, 0.5f, 0.0f,   // 右上角
+            0.5f, -0.5f, 0.0f,  // 右下角
+            -0.5f, 0.5f, 0.0f  // 左上角
     )
 
     /**
@@ -64,11 +64,13 @@ class TriangleRender : GLSurfaceView.Renderer {
         GLES20.glEnableVertexAttribArray(mPositionHandle)
         //准备三角形的坐标数据
         //链接顶点属性
+        //https://www.cnblogs.com/salam/p/4970418.html
         GLES20.glVertexAttribPointer(mPositionHandle, COORDS_PER_VERTEX,
                 GLES20.GL_FLOAT, false,
                 vertexStride, BufferFloatUtil.float2Buffer(vertices))
         //获取片元着色器的vColor成员的句柄
-        //获取片元着色器的vColor成员的句柄
+
+
         mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor")
         //设置绘制三角形的颜色
         //设置绘制三角形的颜色
@@ -80,9 +82,10 @@ class TriangleRender : GLSurfaceView.Renderer {
         //禁止顶点数组的句柄
         GLES20.glDisableVertexAttribArray(mPositionHandle)
         //将背景设置为灰色
-
-
     }
+
+
+
 
     override fun onSurfaceChanged(p0: GL10?, p1: Int, p2: Int) {
         GLES20.glViewport(0, 0, p1, p2);
@@ -92,7 +95,7 @@ class TriangleRender : GLSurfaceView.Renderer {
     private var mProgram = 0
     private val COORDS_PER_VERTEX = 3
     private var mColorHandle = 0
-    var color = floatArrayOf(1.0f, 0f, 0f, 1f) //白色
+    var color = floatArrayOf(1.0f, 0.5f, 0.2f, 1f) //白色
     private val vertexCount: Int = vertices.size / COORDS_PER_VERTEX
 
     //顶点之间的偏移量

@@ -72,7 +72,7 @@ class GradienTextView @JvmOverloads constructor(context: Context, attrs: Attribu
     private fun clipRect(canvas: Canvas, start: Float, region: Float, paint: Paint) {
         //改变的颜色
         canvas.save()
-        canvas.clipRect(start + paddingLeft, 0f, region, height.toFloat())
+//        canvas.clipRect(start + paddingLeft, 0f, region, height.toFloat())
         canvas.drawText(text.toString(), paddingLeft.toFloat(), baseLine.toFloat(), paint)
         canvas.restore()
     }

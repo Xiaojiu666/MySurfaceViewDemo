@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
+import android.util.TypedValue
+import android.util.TypedValue.COMPLEX_UNIT_MM
 import android.view.View
 import android.widget.Toast
 
@@ -15,7 +17,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
 
     companion object {
         /*默认瞳距*/
-        const val DEFAULT_PUPIL_DISTANCE = 2792 / 2
+        const val DEFAULT_PUPIL_DISTANCE = 62f
 
         /*默认view 宽高*/
         const val DEFAULT_VIEW_HEIGHT = 1080
@@ -26,14 +28,14 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
         const val DEFAULT_X_HEIGHT = 100
 
         /*默认矩阵宽高(正方形)*/
-        const val DEFAULT_RECT_WIDTH = 800
+        const val DEFAULT_RECT_WIDTH = 1000
 
         /*默认原型半径*/
         const val DEFAULT_CIRCLE_RADIUS = 5f
 
         /*远点矩阵宽高*/
-        const val DEFAULT_MATRIX_ROW_SIZE = 33
-        const val DEFAULT_MATRIX_COLUMN_SIZE = 33
+        const val DEFAULT_MATRIX_ROW_SIZE = 34
+        const val DEFAULT_MATRIX_COLUMN_SIZE = 34
 
         private const val TAG = "EyesPointView"
     }
@@ -41,7 +43,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
     /**
      * 瞳距
      */
-    var distancePupil = DEFAULT_PUPIL_DISTANCE
+    var distancePupil = TypedValue.applyDimension(COMPLEX_UNIT_MM, DEFAULT_PUPIL_DISTANCE, resources.displayMetrics)
 
     private var viewWidth = 0
     private var viewHeight = 0
@@ -59,6 +61,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
     private var paint2: Paint? = null
     private var paint3: Paint? = null
     private var onCircleDrawComplete: OnCircleDrawComplete? = null
+    var offsetBean: OffsetBean? = OffsetUtils.getOffsetData(getContext())
 
     private fun initPaint() {
         paint = Paint()
@@ -133,8 +136,9 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
         drawLeftX(canvas)
         drawRightX(canvas)
         onMeasureCircleLocation()
-//        drawAllCircle4Point(canvas)
+        drawAllCircle4Point(canvas)
         /*绘制选中圆点*/
+        Log.e(TAG, "onDraw distancePupil $distancePupil")
         Log.e(TAG, "onDraw isDrawComplete $isDrawComplete")
         if (!isDrawComplete) {
             drawSelectorCircle4Point(canvas)
@@ -162,7 +166,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
      */
     private fun getLeftEyePoint(): Point {
         /*左眼十字中心点*/
-        val pointCenterX = viewRadiusWidth - distancePupil.div(2)
+        val pointCenterX = viewRadiusWidth - distancePupil.div(2).toInt()
         val pointCenterY = viewRadiusHeight
         return Point(pointCenterX, pointCenterY)
     }
@@ -172,7 +176,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
      */
     private fun getRightEyePoint(): Point {
         /*右眼十字中心点*/
-        val pointCenterX = viewRadiusWidth + distancePupil.div(2)
+        val pointCenterX = viewRadiusWidth + distancePupil.div(2).toInt()
         val pointCenterY = viewRadiusHeight
         return Point(pointCenterX, pointCenterY)
     }
@@ -210,6 +214,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
 
 
     var isDrawComplete = false
+
     private fun drawSelectorCircle4Point(canvas: Canvas) {
         Log.e(TAG, "point $pointLocation")
         val posi = pointLocation.x * DEFAULT_MATRIX_ROW_SIZE + pointLocation.y
@@ -217,12 +222,11 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
         val rightCircle = circleRightPoints?.get(posi)
         canvas.drawCircle(leftCircle!!.x, leftCircle.y, DEFAULT_CIRCLE_RADIUS, paint2!!)
         canvas.drawCircle(rightCircle!!.x, rightCircle.y, DEFAULT_CIRCLE_RADIUS, paint2!!)
-        postInvalidateDelayed(2000)
+        postInvalidateDelayed(3000)
         isDrawComplete = true;
     }
 
     private fun getCircleCircleMatrix(rectF: RectF, isLeft: Boolean) {
-
         val rectWidth = rectF.right - rectF.left;
         val rectHeight = rectF.bottom - rectF.top;
         //列宽
@@ -233,10 +237,26 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
             for (column in 0 until DEFAULT_MATRIX_COLUMN_SIZE) {
                 //canvas.drawCircle(rectF.left + columnWidth * column, rectF.top + rowHeight * row, DEFAULT_CIRCLE_RADIUS, paint1)
                 if (isLeft) {
-                    val point = CirclePoint(rectF.left + columnWidth * column, rectF.top + rowHeight * row)
+                    val point: CirclePoint
+                    if (offsetBean == null) {
+                        point = CirclePoint(rectF.left + columnWidth * column, rectF.top + rowHeight * row)
+                    } else {
+                        val xOffset = offsetBean?.leftOffsetU?.get(row)?.get(column)?.toFloat()
+                        val yOffset = offsetBean?.leftOffsetV?.get(row)?.get(column)?.toFloat()
+                        point = CirclePoint(rectF.left + (columnWidth * column) + xOffset!!, rectF.top + rowHeight * row + yOffset!!)
+                        Log.e(TAG, "xOffset $xOffset , yOffset $yOffset")
+                    }
                     circleLeftPoints?.add(point);
                 } else {
-                    val point = CirclePoint(rectF.left + columnWidth * column, rectF.top + rowHeight * row)
+                    val point: CirclePoint
+                    if (offsetBean == null) {
+                        point = CirclePoint(rectF.left + columnWidth * column, rectF.top + rowHeight * row)
+                    } else {
+                        val xOffset = offsetBean?.rightOffsetU?.get(row)?.get(column)?.toFloat()
+                        val yOffset = offsetBean?.rightOffsetV?.get(row)?.get(column)?.toFloat()
+                        point = CirclePoint(rectF.left + (columnWidth * column) + xOffset!!, rectF.top + rowHeight * row + yOffset!!)
+                        Log.e(TAG, "xOffset $xOffset , yOffset $yOffset")
+                    }
                     circleRightPoints?.add(point);
                 }
             }
@@ -245,7 +265,7 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
             onCircleDrawComplete?.onDrawComplete()
         }
         Log.e(TAG, "leftCircles ${circleLeftPoints}")
-        Log.e(TAG, "rightCircles $circleRightPoints}")
+//        Log.e(TAG, "rightCircles $circleRightPoints}")
     }
 
     init {
@@ -309,5 +329,14 @@ class EyesPointView @JvmOverloads constructor(context: Context?, attrs: Attribut
             return true
         }
         return false
+    }
+
+    fun setPupilDistance(setup: Int) {
+        distancePupil += setup * 10
+        invalidate()
+    }
+
+    fun showPoint() {
+        viewInvalidate()
     }
 }
