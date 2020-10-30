@@ -16,6 +16,7 @@ import javax.microedition.khronos.opengles.GL10
 class DoubleTriangleRender : GLSurfaceView.Renderer {
 
 
+
     // 1.顶点着色器
     private val vertexShaderCode = "attribute vec4 vPosition;" +
             "void main() {" +
@@ -27,11 +28,11 @@ class DoubleTriangleRender : GLSurfaceView.Renderer {
             // first triangle
             -0.9f, -0.5f, 0.0f,  // left
             -0.0f, -0.5f, 0.0f,  // right
-            -0.45f, 0.5f, 0.0f,  // top
+            -0.45f, -0.2f, 0.0f,  // top
             // second triangle
             0.0f, -0.5f, 0.0f,  // left
             0.9f, -0.5f, 0.0f,  // right
-            0.45f, 0.5f, 0.0f   // top
+            0.45f, -0.2f, 0.0f   // top
     )
 
 
@@ -42,6 +43,15 @@ class DoubleTriangleRender : GLSurfaceView.Renderer {
      * 片段着色程序 - 用于使用颜色或纹理渲染形状面的 OpenGL ES 代码。
      */
     private val fragmentShaderCode = "precision mediump float;" +
+            "uniform vec4 vColor;" +
+            "void main() {" +
+            "  gl_FragColor = vColor;" +
+            "}"
+
+    /**
+     * 片段着色程序 - 用于使用颜色或纹理渲染形状面的 OpenGL ES 代码。
+     */
+    private val fragmentShaderCodeWhite = "precision mediump float;" +
             "uniform vec4 vColor;" +
             "void main() {" +
             "  gl_FragColor = vColor;" +
@@ -82,7 +92,6 @@ class DoubleTriangleRender : GLSurfaceView.Renderer {
                 vertexStride, BufferFloatUtil.float2Buffer(vertices))
         //获取片元着色器的vColor成员的句柄
 
-
         mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor")
         //设置绘制三角形的颜色
         //设置绘制三角形的颜色
@@ -108,6 +117,7 @@ class DoubleTriangleRender : GLSurfaceView.Renderer {
     private val COORDS_PER_VERTEX = 3
     private var mColorHandle = 0
     var color = floatArrayOf(1.0f, 0.5f, 0.2f, 1f) //白色
+    var colorWhite = floatArrayOf(0f, 0.5f, 0.2f, 1f) //白色
     private val vertexCount: Int = vertices.size / COORDS_PER_VERTEX
 
     //顶点之间的偏移量
@@ -127,14 +137,18 @@ class DoubleTriangleRender : GLSurfaceView.Renderer {
                 vertexShaderCode)
         val fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,
                 fragmentShaderCode)
+        val fragmentShaderCodeWhite = loadShader(GLES20.GL_FRAGMENT_SHADER,
+                fragmentShaderCodeWhite)
         // 创建空的OpenGL ES程序
         mProgram = GLES20.glCreateProgram()
         // 添加顶点着色器到程序中
         GLES20.glAttachShader(mProgram, vertexShader)
         // 添加片段着色器到程序中
         GLES20.glAttachShader(mProgram, fragmentShader)
+        GLES20.glAttachShader(mProgram, fragmentShaderCodeWhite)
         // 创建OpenGL ES程序可执行文件
         GLES20.glLinkProgram(mProgram)
+
 
     }
 }
