@@ -42,11 +42,9 @@ public class CameraDrawer {
      */
     private static final float VERTEXES[] = {
             -1.0f, 1.0f,
-            -1.0f, 0f,
-            -1.0f, -1.0f,
-            0f, -1.0f,
-            0f, 0.5f,
-            0f, 1.0f,
+            1f, 1f,
+            1f, -1.0f,
+            -1f, -1.0f,
     };
 
     // 后置摄像头使用的纹理坐标

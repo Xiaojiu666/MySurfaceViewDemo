@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-public class CameraDrawer1 {
+public class CameraDrawer2 {
 
     private static final String TAG = "CameraDrawer";
     private final String VERTEX_SHADER = "" +
@@ -73,10 +73,10 @@ public class CameraDrawer1 {
      * 顶点贴图 :
      */
     private static final float VERTEXES[] = {
-            0f, 1.0f,
-            0f, -1.0f,
-            1f, -1.0f,
-            1f, 1.0f,
+            -1f, 1f,
+            -1f, -1.0f,
+            0, -1.0f,
+            0, 1.0f,
     };
 
 
@@ -85,7 +85,7 @@ public class CameraDrawer1 {
     private final int VERTEX_SIZE = 2;
     private final int VERTEX_STRIDE = VERTEX_SIZE * 4;
 
-    public CameraDrawer1() {
+    public CameraDrawer2() {
         // init float buffer for vertex coordinates
         // 将JAVA的 数组转换成ByteBUffer
         mVertexBuffer = ByteBuffer.allocateDirect(VERTEXES.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();

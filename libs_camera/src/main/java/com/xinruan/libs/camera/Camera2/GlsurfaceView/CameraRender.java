@@ -25,7 +25,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
     private CameraDrawer mDrawer;
     private int[] texture;
     private CameraDrawer1 mDrawer1;
-    private GPUImagePixelation mDrawer2;
+    private CameraDrawer2 mDrawer2;
 
     public CameraRender(Activity mContext, GLSurfaceView glView) {
         this.mContext = mContext;
@@ -47,7 +47,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
         GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
         mDrawer = new CameraDrawer();
         mDrawer1 = new CameraDrawer1();
-        mDrawer2 = new GPUImagePixelation();
+        mDrawer2 = new CameraDrawer2();
         mSurfaceTexture = new SurfaceTexture(texture[0]);
         mSurfaceTexture.setDefaultBufferSize(4000, 3000);
         //监听有新图像到来
@@ -61,7 +61,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         Log.e(TAG,"onSurfaceChanged");
-        mDrawer2.onOutputSizeChanged(width, height);
+//        mDrawer2.onOutputSizeChanged(width, height);
     }
 
     @Override
@@ -70,8 +70,9 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         mSurfaceTexture.updateTexImage();
-        //       mDrawer2.draw(texture[0]);
         mDrawer1.draw(texture[0], false);
+        mDrawer2.draw(texture[0], false);
+//        mDrawer1.draw(texture[0], false);
     }
 
     @Override
