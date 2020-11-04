@@ -22,8 +22,8 @@ public class MyClass {
         try {
             Reader fileReader = new FileReader(filePath);
             FileWriter fileWriter = new FileWriter(writeFile);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writeFile),"UTF-8"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(writeFile), "UTF-8"));
             String string = null;
             while ((string = bufferedReader.readLine()) != null) {
                 System.out.println(string);
@@ -40,6 +40,6 @@ public class MyClass {
 
     private static boolean checkNotes(String lineContant) {
         String trim = lineContant.trim();
-        return !trim.startsWith("//") && !trim.startsWith("/*") && !trim.startsWith("*") && !trim.startsWith("*/");
+        return !trim.startsWith("//") && !trim.startsWith("/*") && !trim.startsWith("*") && !trim.startsWith("*/") && !trim.isEmpty();
     }
 }

@@ -46,13 +46,20 @@
             android:name="com.view.EyesPointView.EyesPointActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.view.StickyScrollView.StickScrollViewActivcity">
+
+        </activity>
+
+        <activity android:name="com.view.recycleView.RcvActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-<!--        <activity android:name="com.view.EyesPointView.EyesPointActivity"/>-->
+        <!--        <activity android:name="com.view.EyesPointView.EyesPointActivity"/>-->
     </application>
 </manifest>

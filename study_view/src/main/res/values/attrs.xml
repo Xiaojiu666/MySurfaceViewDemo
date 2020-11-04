@@ -23,7 +23,10 @@
         <attr name="elNoNetWorkLayout" format="reference" />
         <attr name="elEmptyLayoutType" format="string" />
     </declare-styleable>
-
+    <declare-styleable name="StickyScrollView">
+        <attr name="stuckShadowHeight" format="dimension" />
+        <attr name="stuckShadowDrawable" format="reference" />
+    </declare-styleable>
     <declare-styleable name="StatusBarHeightView">
         <attr name="use_type" format="integer">
             <enum name="use_height" value="0" />
@@ -43,10 +46,6 @@
         <attr name="isOpened" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="StickyScrollView">
-        <attr name="stuckShadowHeight" format="dimension" />
-        <attr name="stuckShadowDrawable" format="reference" />
-    </declare-styleable>
 
     <declare-styleable name="CircleProgressBar">
         <attr name="line_count" format="integer|reference" />
