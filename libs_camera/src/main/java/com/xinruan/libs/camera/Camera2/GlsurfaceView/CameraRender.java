@@ -71,7 +71,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         mSurfaceTexture.updateTexImage();
         mDrawer1.draw(texture[0], false);
-        mDrawer2.draw(texture[0], false);
+//        mDrawer2.draw(texture[0], false);
 //        mDrawer1.draw(texture[0], false);
     }
 

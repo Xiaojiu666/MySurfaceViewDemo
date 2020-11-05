@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sn.study_pic">
@@ -11,48 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.view.study_pic.VerticalDrawerLayoutActivity">
-
-        </activity>
-
-        <activity android:name="com.view.study_pic.DrawerLayoutActivity">
-
-        </activity>
-        <activity android:name="com.view.ViewDragHelper.BottomDrawerActivity">
-
-        </activity>
-        <activity android:name="com.view.dispathView.MyActivity">
-
-        </activity>
-
-        <activity android:name="com.view.cornerImage.MainActivity">
-
-
-        </activity>
-
-        <activity android:name="com.bitmap.ChangeColorActivity">
-
-        </activity>
-
-        <activity android:name="com.customRecyclerView.RecyclerViewActivity">
-
-        </activity>
-        <activity android:name="com.view.GradienTextView.GradienActivity">
-
-        </activity>
-        <!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->
-
+        <activity
+            android:name="com.view.recycleView.MainActivity"
+            android:label="@string/title_activity_main"></activity>
+        <activity android:name="com.view.study_pic.VerticalDrawerLayoutActivity"></activity>
+        <activity android:name="com.view.study_pic.DrawerLayoutActivity"></activity>
+        <activity android:name="com.view.ViewDragHelper.BottomDrawerActivity"></activity>
+        <activity android:name="com.view.dispathView.MyActivity"></activity>
+        <activity android:name="com.view.cornerImage.MainActivity"></activity>
+        <activity android:name="com.bitmap.ChangeColorActivity"></activity>
+        <activity android:name="com.customRecyclerView.RecyclerViewActivity"></activity>
+        <activity android:name="com.view.GradienTextView.GradienActivity"></activity> <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar"> -->
         <activity
             android:name="com.view.EyesPointView.EyesPointActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
-
-        <activity android:name="com.view.StickyScrollView.StickScrollViewActivcity">
-
-        </activity>
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name="com.view.StickyScrollView.StickScrollViewActivcity"></activity>
         <activity android:name="com.view.recycleView.RcvActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,6 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--        <activity android:name="com.view.EyesPointView.EyesPointActivity"/>-->
     </application>
+
 </manifest>

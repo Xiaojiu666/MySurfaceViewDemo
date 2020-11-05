@@ -18,15 +18,15 @@
 
         </activity>
         <activity android:name=".Camera2.GlsurfaceView.GlViewCameraActivity">
-
-        </activity>
-
-        <activity android:name=".Camera2.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".Camera2.MainActivity">
+
         </activity>
 
         <service

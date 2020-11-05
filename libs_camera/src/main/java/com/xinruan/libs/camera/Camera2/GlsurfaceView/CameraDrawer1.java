@@ -37,37 +37,47 @@ public class CameraDrawer1 {
     private int mPositionHandle;
     private int mTextureHandle;
 
-    // 后置摄像头使用的纹理坐标
+
+//    // 由于相机自带旋转90度 所以纹理坐标数据可能需要旋转，顺时针
 //    private static final float TEXTURE_BACK[] = {
-//            0.0f, 1.0f,
 //            1.0f, 1.0f,
 //            1.0f, 0.0f,
 //            0.0f, 0.0f,
-//    };
-//    private static final float TEXTURE_BACK[] = {
-//            0f, 0f,
-//            0f, 1f,
-//            1f, 1f,
-//            1f, 0f,
+//            0.0f, 1.0f,
 //    };
 
     // 由于相机自带旋转90度 所以纹理坐标数据可能需要旋转，顺时针
     private static final float TEXTURE_BACK[] = {
-            1.0f, 1.0f,
             1.0f, 0.0f,
             0.0f, 0.0f,
+            1.0f, 1.0f,
             0.0f, 1.0f,
+//            正常
+//            1.0f, 1.0f,
+//            1.0f, 0.0f,
+//            0.0f, 0.0f,
+//            0.0f, 1.0f,
     };
 
 
     // 前置摄像头使用的纹理坐标用于相机数据绘制
     private static final float TEXTURE_FRONT[] = {
+            1.0f, 0.0f,
+            0.0f, 0.0f,
             1.0f, 1.0f,
             0.0f, 0.0f,
-            0.0f, 0.0f,
-            1.0f, 0.0f,
     };
 
+
+//    /**
+//     * 顶点贴图 :
+//     */
+//    private static final float VERTEXES[] = {
+//            0f, 1.0f,
+//            0f, -1.0f,
+//            1f, -1.0f,
+//            1f, 1.0f,
+//    };
 
     /**
      * 顶点贴图 :
@@ -76,11 +86,11 @@ public class CameraDrawer1 {
             0f, 1.0f,
             0f, -1.0f,
             1f, -1.0f,
-            1f, 1.0f,
+            1f, 1.0f
     };
 
 
-    private static final byte VERTEX_ORDER[] = {0, 1, 2, 1, 2, 3}; // order to draw vertices
+    private static final byte VERTEX_ORDER[] = {0, 1, 2, 2, 3, 0}; // order to draw vertices
 
     private final int VERTEX_SIZE = 2;
     private final int VERTEX_STRIDE = VERTEX_SIZE * 4;
@@ -122,30 +132,8 @@ public class CameraDrawer1 {
 //
 //        }
         // 真正绘制的操作
-        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
-
-        GLES20.glDisableVertexAttribArray(mPositionHandle);
-        GLES20.glDisableVertexAttribArray(mTextureHandle);
-    }
-
-    public void draw2(int texture, boolean isFrontCamera) {
-        GLES20.glUseProgram(mProgram); // 指定使用的program
-        GLES20.glEnable(GLES20.GL_CULL_FACE); // 启动剔除
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture); // 绑定纹理
-        GLES20.glEnableVertexAttribArray(mPositionHandle);
-        GLES20.glVertexAttribPointer(mPositionHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mVertexBuffer);
-        GLES20.glEnableVertexAttribArray(mTextureHandle);
-        GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mBackTextureBuffer);
-
-//        if (isFrontCamera) {
-//            GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mFrontTextureBuffer);
-//        } else {
-//
-//        }
-        // 真正绘制的操作
-        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
-
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
+        //       GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 4);
         GLES20.glDisableVertexAttribArray(mPositionHandle);
         GLES20.glDisableVertexAttribArray(mTextureHandle);
     }
