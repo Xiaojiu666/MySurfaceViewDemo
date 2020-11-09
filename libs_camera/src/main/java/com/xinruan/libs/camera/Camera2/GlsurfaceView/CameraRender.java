@@ -60,13 +60,13 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        Log.e(TAG,"onSurfaceChanged");
+//        Log.e(TAG,"onSurfaceChanged");
 //        mDrawer2.onOutputSizeChanged(width, height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        Log.e(TAG,"onDrawFrame");
+//        Log.e(TAG,"onDrawFrame");
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         mSurfaceTexture.updateTexImage();
@@ -77,7 +77,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
 
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-        Log.e(TAG,"onFrameAvailable");
+//        Log.e(TAG,"onFrameAvailable");
         glView.requestRender();
     }
 }

@@ -268,6 +268,7 @@ public class Camera2Manager extends CameraLoader {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+        getCameraOrientation();
     }
 
     /**
