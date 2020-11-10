@@ -38,6 +38,10 @@ public class CameraDrawer1 {
     private int mTextureHandle;
 
 
+    private int SCREEN_WIDTH = 2244;
+
+    private int SCREEN_HEIGHT = 1080;
+
 //    // 由于相机自带旋转90度 所以纹理坐标数据可能需要旋转，顺时针
 //    private static final float TEXTURE_BACK[] = {
 //            1.0f, 1.0f,
@@ -48,25 +52,17 @@ public class CameraDrawer1 {
 
     // 由于相机自带旋转90度 所以纹理坐标数据可能需要旋转，顺时针
     private static final float TEXTURE_BACK[] = {
-            0f, 0f,
-            0f, 1f,
-            1f, 0f,
-            1f, 1f,
 
-//            正常
-//            1.0f, 1.0f,
-//            0.0f, 1.0f,
-//            0.0f, 0.0f,
-//            1.0f, 0.0f,
-    };
-
-
-    // 前置摄像头使用的纹理坐标用于相机数据绘制
-    private static final float TEXTURE_FRONT[] = {
-            0.1f, 0.0f,
-            0.0f, 0.1f,
-            1.0f, 1.0f,
-            0.0f, 0.0f,
+//            0, 0,
+//            0, 1,
+//            1, 1,
+//            1, 0
+            0.5f, 0.5f,
+            1f, 0.5f,
+            0.5f, 0f,
+            0f, 0.5f,
+            0.5f, 1f,
+            1f, 0.5f,
     };
 
 
@@ -74,12 +70,12 @@ public class CameraDrawer1 {
      * 顶点贴图 :
      */
     private static final float VERTEXES[] = {
-            -1f, 1.0f,
-            -1f, -1f,
-            1f, 1.0f,
-            1f, -1f,
+            0f, 0f,
+            1, 0,
+            0, 1f,
+            -1f, 0f,
+            0, -1f,
     };
-
 
 //    private static final byte VERTEX_ORDER[] = {0, 1, 2, 0, 2, 3}; // order to draw vertices
 
@@ -89,14 +85,16 @@ public class CameraDrawer1 {
     public CameraDrawer1() {
         // init float buffer for vertex coordinates
         // 将JAVA的 数组转换成ByteBUffer
-        mVertexBuffer = ByteBuffer.allocateDirect(VERTEXES.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
-        mVertexBuffer.put(VERTEXES).position(0);
+        clacVerPoint();
+        for (int i = 0; i < VERTEXES_RECT.length; i++) {
+            Log.e(TAG, "VERTEXES_RECT " + VERTEXES_RECT[i]);
+        }
+        mVertexBuffer = ByteBuffer.allocateDirect(VERTEXES_RECT.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mVertexBuffer.put(VERTEXES_RECT).position(0);
 
         // init float buffer for texture coordinates
         mBackTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_BACK.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         mBackTextureBuffer.put(TEXTURE_BACK).position(0);
-        mFrontTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_FRONT.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
-        mFrontTextureBuffer.put(TEXTURE_FRONT).position(0);
 
 //        // init byte buffer for draw list
 //        mDrawListBuffer = ByteBuffer.allocateDirect(VERTEX_ORDER.length).order(ByteOrder.nativeOrder());
@@ -117,7 +115,7 @@ public class CameraDrawer1 {
         GLES20.glEnableVertexAttribArray(mTextureHandle);
         GLES20.glVertexAttribPointer(mTextureHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mBackTextureBuffer);
         //        GLES20.glDrawElements(GLES20.GL_TRIANGLES, VERTEX_ORDER.length, GLES20.GL_UNSIGNED_BYTE, mDrawListBuffer);
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, VERTEXES.length);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, VERTEXES_RECT.length);
         GLES20.glDisableVertexAttribArray(mPositionHandle);
         GLES20.glDisableVertexAttribArray(mTextureHandle);
     }
@@ -181,5 +179,58 @@ public class CameraDrawer1 {
             shader = GLES20.GL_NONE;
         }
         return shader;
+    }
+
+    private float VERTEXES_RECT[] = new float[6 * 2];
+
+    //            0f, 0f,
+    //            1, 0,
+//            0, 1f,
+//            -1f, 0f,
+//            0, -1f,
+//            1, 0
+    public void clacVerPoint() {
+
+        VERTEXES_RECT[0] = 0;
+        VERTEXES_RECT[1] = 0;
+
+        VERTEXES_RECT[2] = 0.48f * 1;
+        VERTEXES_RECT[3] = 0;
+
+        VERTEXES_RECT[4] = 0;
+        VERTEXES_RECT[5] = 1;
+
+        VERTEXES_RECT[6] = -(0.48f * 1);
+        VERTEXES_RECT[7] = 0;
+
+        VERTEXES_RECT[8] = 0;
+        VERTEXES_RECT[9] = -1;
+
+        VERTEXES_RECT[10] = 0.48f * 1;
+        VERTEXES_RECT[11] = 0;
+
+
+//        VERTEXES_RECT[0] = 0;
+//        VERTEXES_RECT[1] = 0;
+//
+//        VERTEXES_RECT[2] = 0.48f * 1;
+//        VERTEXES_RECT[3] = 0;
+//
+//        VERTEXES_RECT[4] = 0;
+//        VERTEXES_RECT[5] = 1;
+
+//        VERTEXES_RECT[0] = -(0.48f * 1);
+//        VERTEXES_RECT[1] = 0;
+//
+//        VERTEXES_RECT[2] = 0;
+//        VERTEXES_RECT[3] = -1;
+//
+//        VERTEXES_RECT[4] = 0.48f * 1;
+//        VERTEXES_RECT[5] = 0;
+
+    }
+
+    public float clacWitdhHeigtScale() {
+        return (float) (SCREEN_HEIGHT / SCREEN_WIDTH);
     }
 }
