@@ -26,6 +26,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
     private int[] texture;
     private CameraDrawer1 mDrawer1;
     private CameraDrawer2 mDrawer2;
+    private CameraDrawer3 mDrawer3;
 
     public CameraRender(Activity mContext, GLSurfaceView glView) {
         this.mContext = mContext;
@@ -48,6 +49,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
         mDrawer = new CameraDrawer();
         mDrawer1 = new CameraDrawer1();
         mDrawer2 = new CameraDrawer2();
+        mDrawer3 = new CameraDrawer3();
         mSurfaceTexture = new SurfaceTexture(texture[0]);
         mSurfaceTexture.setDefaultBufferSize(4000, 3000);
         //监听有新图像到来
@@ -70,7 +72,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         mSurfaceTexture.updateTexImage();
-        mDrawer1.draw(texture[0], false);
+        mDrawer3.draw(texture[0], false);
 //        mDrawer2.draw(texture[0], false);
 //        mDrawer1.draw(texture[0], false);
     }

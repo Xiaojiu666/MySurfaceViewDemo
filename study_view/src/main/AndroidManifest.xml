@@ -28,6 +28,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name="com.view.StickyScrollView.StickScrollViewActivcity"></activity>
+
         <activity android:name="com.view.recycleView.RcvActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

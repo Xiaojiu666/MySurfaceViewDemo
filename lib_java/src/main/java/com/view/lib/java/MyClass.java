@@ -13,9 +13,10 @@ import java.io.Reader;
 
 public class MyClass {
     public static void main(String[] args) {
-        String file = "E:\\a.TXT";
-        File writeFile = new File("E:\\a1.TXT");
-        readFile(file, writeFile);
+        System.out.println(Math.cos(Math.PI / 2));
+//        String file = "E:\\a.TXT";
+//        File writeFile = new File("E:\\a1.TXT");
+//        readFile(file, writeFile);
     }
 
     public static void readFile(String filePath, File writeFile) {

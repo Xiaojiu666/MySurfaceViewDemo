@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.view.recycleView.R
+import com.sn.study_pic.R
 
 class DashboardFragment : Fragment() {
 
