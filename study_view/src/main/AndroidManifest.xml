@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name="com.view.recycleView.MainActivity"
-            android:label="@string/title_activity_main"></activity>
         <activity android:name="com.view.study_pic.VerticalDrawerLayoutActivity"></activity>
         <activity android:name="com.view.study_pic.DrawerLayoutActivity"></activity>
         <activity android:name="com.view.ViewDragHelper.BottomDrawerActivity"></activity>
@@ -30,6 +27,9 @@
         <activity android:name="com.view.StickyScrollView.StickScrollViewActivcity"></activity>
 
         <activity android:name="com.view.recycleView.RcvActivity">
+
+        </activity>
+        <activity android:name="com.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

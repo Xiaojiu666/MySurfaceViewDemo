@@ -30,7 +30,6 @@ class VerticalDragCallBack(var datas: ArrayList<String>) : ItemTouchHelper.Callb
         //得到当拖拽的viewHolder的Position
         val fromPosition = viewHolder.adapterPosition
         //拿到当前拖拽到的item的viewHolder
-        //拿到当前拖拽到的item的viewHolder
         val toPosition = target.adapterPosition
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {

@@ -1,3 +1,5 @@
+include ':android_advanced'
+include ':app:mylibrary'
 include ':lib_java'
 include ':study_opengles'
 include ':app:study_html'

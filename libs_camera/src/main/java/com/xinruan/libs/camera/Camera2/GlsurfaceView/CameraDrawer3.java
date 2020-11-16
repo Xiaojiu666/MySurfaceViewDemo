@@ -184,13 +184,13 @@ public class CameraDrawer3 {
     }
 
     //    private float VERTEXES_RECT[] = new float[(36 / 4 + 1) * 2];
-    private float VERTEXES_RECT[] = new float[92 * 2];
-    private float TEXTTURE[] = new float[92 * 2];
+    private float VERTEXES_RECT[] = new float[5 * 2];
+    private float TEXTTURE[] = new float[5 * 2];
 
     // 计算弧度
     //Math.PI * 2 = 360度
     //计算一弧度等于多少度
-    float span = (float) (Math.PI * 2 / 360);
+    float span = (float) (Math.PI * 2 / (360 / 30));
 
     public void clacVerPoint() {
         VERTEXES_RECT[0] = 0f;
@@ -210,12 +210,20 @@ public class CameraDrawer3 {
     public void clacTexttrue() {
         TEXTTURE[0] = 0f;
         TEXTTURE[1] = 0f;
+
+//        TEXTTURE[2] = 0f;
+//        TEXTTURE[3] = 1f;
+//
+//        TEXTTURE[4] = 1f;
+//        TEXTTURE[5] = 1f;
+//
+//        TEXTTURE[6] = 1f;
+//        TEXTTURE[7] = 0f;
         int K = 0;
         for (int i = 2; i < TEXTTURE.length; i += 2) {
-//            Log.e(TAG, " i : " + i);
             int i1 = K++;
-            TEXTTURE[i] =  (float) Math.sin(span * i1);
-            TEXTTURE[i + 1] =   (float) Math.cos(span * i1);
+            TEXTTURE[i] = (float) Math.sin(span * i1);
+            TEXTTURE[i + 1] = (float) Math.cos(span * i1);
         }
 //        reverse(TEXTTURE);
     }

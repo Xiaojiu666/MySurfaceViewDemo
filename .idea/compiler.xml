@@ -3,7 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="lib_java" target="1.7" />
+      <module name="MySurfaceViewDemo.android_advanced" target="1.8" />
       <module name="MySurfaceViewDemo.app" target="1.8" />
+      <module name="MySurfaceViewDemo.app.mylibrary" target="1.8" />
       <module name="MySurfaceViewDemo.app.study_html" target="1.8" />
       <module name="MySurfaceViewDemo.libs_camera" target="1.8" />
       <module name="MySurfaceViewDemo.libs_common" target="1.8" />
