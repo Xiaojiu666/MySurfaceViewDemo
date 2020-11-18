@@ -25,11 +25,11 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.Recycl
         this.mContext = mContext;
     }
 
-
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_view, parent, false);
+
         return new RecyclerHolder(inflate);
     }
 
@@ -38,6 +38,11 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.Recycl
     public void onBindViewHolder(@NonNull RecyclerHolder holder, final int position) {
         String name = dataList.get(position);
         holder.mItemName.setText(name);
+        holder.itemView.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(view, position);
+            }
+        });
     }
 
     public void setData(List<String> dataList) {

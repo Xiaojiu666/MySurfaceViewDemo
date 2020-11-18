@@ -1,4 +1,4 @@
-package com.view.study_opengles
+package com.view.study_opengles.first
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -9,7 +9,6 @@ import java.nio.FloatBuffer
  *
  */
 object BufferFloatUtil {
-
 
     /**
      * 数组转换Buffer 转为GL 所需要数据

@@ -2,7 +2,7 @@ package com.view.study_opengles.first.test
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import com.view.study_opengles.BufferFloatUtil
+import com.view.study_opengles.first.BufferFloatUtil
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.ShortBuffer

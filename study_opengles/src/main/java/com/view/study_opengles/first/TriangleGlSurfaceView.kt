@@ -15,6 +15,6 @@ class TriangleGlSurfaceView : GLSurfaceView {
 
     init {
         setEGLContextClientVersion(2)
-        setRenderer(DoubleTriangleRender())
+        setRenderer(SquareRender())
     }
 }

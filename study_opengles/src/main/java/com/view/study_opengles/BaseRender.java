@@ -20,20 +20,14 @@ public class BaseRender implements GLSurfaceView.Renderer {
     private BaseTriangle mTriangle;
     private BaseSquare mSquare;
 
-
-
-
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-
-
         // Set the background frame color
         GLES20.glClearColor(0f, 0f, 0f, 0.5f);
         // initialize a triangle
         mTriangle = new BaseTriangle();
         // initialize a square
         mSquare = new BaseSquare();
-
     }
 
 
@@ -96,7 +90,6 @@ public class BaseRender implements GLSurfaceView.Renderer {
      * @return
      */
     public static int loadShader(int type, String shaderCode) {
-
         // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
         // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
         int shader = GLES20.glCreateShader(type);

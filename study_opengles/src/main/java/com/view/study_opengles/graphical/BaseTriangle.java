@@ -3,6 +3,7 @@ package com.view.study_opengles.graphical;
 import android.opengl.GLES20;
 
 import com.view.study_opengles.BaseRender;
+import com.view.study_opengles.first.BufferFloatUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -18,7 +19,7 @@ public class BaseTriangle {
      */
     private final String vertexShaderCode =
             "uniform mat4 uMVPMatrix;" +
-            "attribute vec4 vPosition;" +
+                    "attribute vec4 vPosition;" +
                     "void main() {" +
 //                    "  gl_Position = vPosition;" +
                     "  gl_Position = uMVPMatrix * vPosition;" +
@@ -34,15 +35,16 @@ public class BaseTriangle {
                     "  gl_FragColor = vColor;" +
                     "}";
 
-
     private FloatBuffer vertexBuffer;
-    // number of coordinates per vertex in this array
     static final int COORDS_PER_VERTEX = 3;
+
     // 顶点坐标系是-1f,可以超出 有效果
     static float triangleCoords[] = {   // in counterclockwise order:
-            0.0f, 1f, 0.0f, // top
-            -1f, 0f, 0.0f,// bottom left
-            1f, 0f, 0.0f, // bottom right
+            -1f, -1f, // top
+            -1f, 1f,// bottom left
+            1f, -1f,  // bottom right
+            1f, 1f  // bottom right
+
     };
 
 
@@ -69,8 +71,6 @@ public class BaseTriangle {
         vertexBuffer.put(triangleCoords);
         // set the buffer to read the first coordinate
         vertexBuffer.position(0);
-
-
         /**
          * 根据类型和代码，为GL加载 顶点&片段着色器对象
          */
