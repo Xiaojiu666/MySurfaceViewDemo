@@ -39,7 +39,6 @@ public class MyRender1 implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, width, height);
 
         float ratio = (float) width / height;
-
         // 这个投影矩阵被应用于对象坐标在onDrawFrame（）方法中
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
 
