@@ -27,13 +27,8 @@ public abstract class CameraLoader {
 
     protected CameraLoader() {
     }
-
-
-
-
     /**
      * 打开相机
-     *
      */
     abstract void openCamera();
 

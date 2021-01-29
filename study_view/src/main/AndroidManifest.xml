@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sn.study_pic">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 外存储读权限，构建语法需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 配置权限，用来记录应用配置信息 -->
+
 
     <application
         android:name="com.view.study_pic.MyApp"
@@ -15,10 +18,20 @@
         <activity android:name="com.view.study_pic.VerticalDrawerLayoutActivity"></activity>
         <activity android:name="com.view.study_pic.DrawerLayoutActivity"></activity>
         <activity android:name="com.view.ViewDragHelper.BottomDrawerActivity"></activity>
-        <activity android:name="com.view.dispathView.MyActivity"></activity>
+        <activity android:name="com.view.dispathView.MyActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name="com.view.cornerImage.MainActivity"></activity>
         <activity android:name="com.bitmap.ChangeColorActivity"></activity>
-        <activity android:name="com.customRecyclerView.RecyclerViewActivity"></activity>
+        <activity android:name="com.customRecyclerView.RecyclerViewActivity">
+
+        </activity>
         <activity android:name="com.view.GradienTextView.GradienActivity"></activity> <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar"> -->
         <activity
             android:name="com.view.EyesPointView.EyesPointActivity"
@@ -30,11 +43,11 @@
 
         </activity>
         <activity android:name="com.view.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity android:name="com.recyclerview_gallery.SpeedRecyclerMainActivity">
+
+
         </activity>
     </application>
 

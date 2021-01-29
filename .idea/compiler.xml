@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="1.8">
       <module name="lib_java" target="1.7" />
-      <module name="MySurfaceViewDemo.android_advanced" target="1.8" />
-      <module name="MySurfaceViewDemo.app" target="1.8" />
       <module name="MySurfaceViewDemo.app.mylibrary" target="1.8" />
       <module name="MySurfaceViewDemo.app.study_html" target="1.8" />
-      <module name="MySurfaceViewDemo.libs_camera" target="1.8" />
-      <module name="MySurfaceViewDemo.libs_common" target="1.8" />
-      <module name="MySurfaceViewDemo.libs_process" target="1.8" />
-      <module name="MySurfaceViewDemo.libs_video" target="1.8" />
-      <module name="MySurfaceViewDemo.study_desgin_model" target="1.8" />
-      <module name="MySurfaceViewDemo.study_opengles" target="1.8" />
-      <module name="MySurfaceViewDemo.study_thread" target="1.8" />
-      <module name="MySurfaceViewDemo.study_view" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

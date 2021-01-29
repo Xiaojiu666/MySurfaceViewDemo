@@ -2,11 +2,14 @@
 <com.view.dispathView.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/my_view_group"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="300dp"
+    android:background="#000">
 
-    <com.view.CircleView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <com.view.dispathView.MyView
+        android:id="@+id/myView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#F0F" />
 
     <!--    <com.sn.dispathView.MyView-->
     <!--        android:id="@+id/my_view"-->

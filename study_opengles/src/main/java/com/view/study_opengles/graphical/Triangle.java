@@ -69,7 +69,6 @@ public class Triangle {
         // 设置缓冲区来读取第一个坐标
         vertexBuffer.position(0);
 
-
         int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER,
                 vertexShaderCode);
         int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,

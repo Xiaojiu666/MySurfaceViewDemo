@@ -30,6 +30,15 @@ public class BaseRender implements GLSurfaceView.Renderer {
         mSquare = new BaseSquare();
     }
 
+    public volatile float mAngle;
+
+    public float getAngle() {
+        return mAngle;
+    }
+
+    public void setAngle(float angle) {
+        mAngle = angle;
+    }
 
     // vPMatrix is an abbreviation for "Model View Projection Matrix"
     private final float[] vPMatrix = new float[16];
@@ -39,13 +48,13 @@ public class BaseRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl10, int width, int height) {
+        GLES20.glViewport(0, 0, width, height);
         Log.e(TAG, "width " + width + "height " + height);
         // 计算宽高比
         float ratio = (float) width / height;
         // this projection matrix is applied to object coordinates
         // in the onDrawFrame() method
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
-        GLES20.glViewport(0, 0, width, height);
     }
 
     @Override
@@ -61,23 +70,18 @@ public class BaseRender implements GLSurfaceView.Renderer {
         // Calculate the projection and view transformation
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 
-
         // Create a rotation transformation for the triangle
-        long time = SystemClock.uptimeMillis() % 4000L;
-        float angle = 0.090f * ((int) time);
-        Matrix.setRotateM(rotationMatrix, 0, angle, 0, 0, -1.0f);
-
+//        long time = SystemClock.uptimeMillis() % 4000L;
+//        float angle = 0.090f * ((int) time);
+        Matrix.setRotateM(rotationMatrix, 0, mAngle, 0, 1, 0f);
         // Combine the rotation matrix with the projection and camera view
         // Note that the vPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
-
         // Draw triangle
-        mTriangle.draw(scratch);
-
+        mTriangle.draw(vPMatrix);
         // Draw shape
 //        mTriangle.draw(vPMatrix);
-
 //        mTriangle.draw();
     }
 
@@ -97,7 +101,6 @@ public class BaseRender implements GLSurfaceView.Renderer {
         // add the source code to the shader and compile it
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
-
         return shader;
     }
 }

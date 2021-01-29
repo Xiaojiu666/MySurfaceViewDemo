@@ -60,6 +60,5 @@ public class AutoFitSurfaceView extends SurfaceView {
                 Log.e(TAG, "onMeasure  height * ratioWidth / ratioHeight" + height * ratioWidth / ratioHeight + "height" + height);
             }
         }
-
     }
 }

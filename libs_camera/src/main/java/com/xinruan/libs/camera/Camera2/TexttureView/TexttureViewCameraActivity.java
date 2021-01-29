@@ -19,7 +19,7 @@ import com.xinruan.libs.camera.R;
 public class TexttureViewCameraActivity extends AppCompatActivity {
     private static final String TAG = "CameraActivity";
     private Camera2Manager camera2Manager;
-    private Size previewSize = new Size(3000, 4000);
+    private Size previewSize = new Size(4000, 3000);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

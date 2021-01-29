@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 
 /**
@@ -21,6 +22,12 @@ public class MyViewGroup extends FrameLayout {
 
     public MyViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "MyViewGroup  :  onClick ");
+            }
+        });
     }
 
     private static final String TAG = "dispathView";
@@ -28,21 +35,18 @@ public class MyViewGroup extends FrameLayout {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.e(TAG, "MyViewGroup : dispatchTouchEvent " );
-//        Log.e(TAG, "MyViewGroup dispatchTouchEvent event getAction:  " + ev.getAction());
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.e(TAG, "MyViewGroup : onInterceptTouchEvent " );
-//        Log.e(TAG, "MyViewGroup onInterceptTouchEvent event getAction:  " + ev.getAction());
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.e(TAG, "MyViewGroup onTouchEvent event getAction:  " );
-//        Log.e(TAG, "MyViewGroup onTouchEvent event getAction:  " + event.getAction());
         return super.onTouchEvent(event);
     }
 }

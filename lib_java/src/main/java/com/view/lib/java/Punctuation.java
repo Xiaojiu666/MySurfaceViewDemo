@@ -1,24 +1,57 @@
 package com.view.lib.java;
 
-import sun.rmi.runtime.Log;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 /**
  * Created by GuoXu on 2020/11/12 10:28.
  */
 public class Punctuation {
 
-    private static String content = "先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气，不宜妄自菲薄，引喻失义，以塞忠谏之路也。" +
-            "宫中府中，俱为一体，陟罚臧否，不宜异同。若有作奸犯科及为忠善者，宜付有司论其刑赏，以昭陛下平明之理，不宜偏私，使内外异法也。 " +
-            "侍中、侍郎郭攸之、费祎、董允等，此皆良实，志虑忠纯，是以先帝简拔以遗陛下。愚以为宫中之事，事无大小，悉以咨之，然后施行，必能裨补阙漏，有所广益。";
+    private static String content = "Google's," +
+            " Java! " +
+            " sample " +
+            "code " +
+            "that " +
+            "comes, " +
+            "code " + "code ";
+
+    private static String[] words = new String[]{"Google's", "Java", "sample", "code", "that", "comes", "code", "code"};
+    private static ArrayList<Integer> indexs = new ArrayList<Integer>();
 
     public static void main(String[] args) {
-        int k = 0;
-        for (int i = 0; i < content.length(); i++) {
-            if (!isChineseByScript(content.charAt(i))) {
-                k++;
-            }
+//        findWordindexs4Content();
+        testArrayList();
+    }
+
+    private static ArrayList<Demo> demos = new ArrayList<>();
+
+    private static void testArrayList() {
+        for (int i = 0; i < 10; i++) {
+            Demo demo = new Demo("demo" + i, i);
+            demos.add(demo);
         }
-        System.out.println("k.size " + k);
+        boolean demo5 = demos.contains("demo5");
+        System.out.println("demo5 " + demo5);
+    }
+
+
+
+    private static void findWordindexs4Content() {
+
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            int i1 = content.indexOf(word);
+            if (indexs.contains(i1)) {
+                i1 = content.indexOf(word, indexs.get(i - 1) + 1);
+            }
+            if (i1 > -1) {
+                indexs.add(i1);
+            }
+
+            System.out.println("indexs " + indexs.get(i));
+        }
     }
 
     //使用UnicodeScript方法判断

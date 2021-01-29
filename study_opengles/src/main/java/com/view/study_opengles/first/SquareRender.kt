@@ -3,6 +3,7 @@ package com.view.study_opengles.first
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
+import android.os.SystemClock
 import android.util.Log
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -20,7 +21,7 @@ class SquareRender : GLSurfaceView.Renderer {
     private val vertexShaderCode = "attribute vec4 vPosition;" +
             "uniform mat4 uMVPMatrix;" +
             "void main() {" +
-            "  gl_Position = vPosition;" +
+            "  gl_Position =  uMVPMatrix *vPosition;" +
             "}"
 
     private val fragmentShaderCode = "precision mediump float;" +
@@ -41,6 +42,7 @@ class SquareRender : GLSurfaceView.Renderer {
             -0.5f, 0.5f, 0f,   // bottom left
             0.5f, -0.5f, 0f, // bottom right
             0.5f, 0.5f, 0f// top right
+//            0.5f, 0.5f, 0.5f
 
 //            0.6f, -0.5f, 0.5f// bottom right
     )
@@ -57,10 +59,19 @@ class SquareRender : GLSurfaceView.Renderer {
     //设置颜色，依次为红绿蓝和透明通道
     var color = floatArrayOf(1.0f, 0.5f, 0.2f, 1.0f)
     override fun onDrawFrame(p0: GL10?) {
+        val scratch = FloatArray(16)
+
+        // Create a rotation transformation for the triangle
+        val time: Long = SystemClock.uptimeMillis() % 4000L
+        val angle = 0.090f * time.toInt()
+        Matrix.setRotateM(rotationMatrix, 0, angle, 0f, 0f, -1.0f)
+
         // Set the camera position (View matrix)
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, -3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
         // Calculate the projection and view transformation
-        Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
+        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
+        // Create a rotation transformation for the triangle
+
 
         //将程序加入到OpenGLES2.0环境
         GLES20.glUseProgram(mProgram);
@@ -91,13 +102,12 @@ class SquareRender : GLSurfaceView.Renderer {
     private val vPMatrix = FloatArray(16)
     private val projectionMatrix = FloatArray(16)
     private val viewMatrix = FloatArray(16)
-
+    private val rotationMatrix = FloatArray(16)
     override fun onSurfaceChanged(p0: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height);
         val ratio = width.toFloat() / height.toFloat()
         Log.e("onSurfaceChanged", "tatio $ratio")
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
-
     }
 
     override fun onSurfaceCreated(p0: GL10?, p1: EGLConfig?) {

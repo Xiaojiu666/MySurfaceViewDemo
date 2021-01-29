@@ -125,7 +125,7 @@ public class BannerLayoutManager extends RecyclerView.LayoutManager {
     /**
      * @return the mInterval of each item's mOffset
      */
-    private int itemSpace = 20;
+    private int itemSpace = 0;
 
     private float centerScale = 1.2f;
     private float moveSpeed = 1.0f;
@@ -197,7 +197,7 @@ public class BannerLayoutManager extends RecyclerView.LayoutManager {
 
     public BannerLayoutManager(Context context, int orientation, boolean reverseLayout) {
         setEnableBringCenterToFront(true);
-        setMaxVisibleItemCount(3);
+//        setMaxVisibleItemCount(3);
         setOrientation(orientation);
         setReverseLayout(reverseLayout);
         setAutoMeasureEnabled(true);
@@ -408,9 +408,9 @@ public class BannerLayoutManager extends RecyclerView.LayoutManager {
 
         ensureLayoutState();
         resolveShouldLayoutReverse();
-
         //make sure properties are correct while measure more than once
         View scrap = recycler.getViewForPosition(0);
+        // 确认所有View的布局根据哪个来设置
         measureChildWithMargins(scrap, 0, 0);
         mDecoratedMeasurement = mOrientationHelper.getDecoratedMeasurement(scrap);
         mDecoratedMeasurementInOther = mOrientationHelper.getDecoratedMeasurementInOther(scrap);
@@ -420,7 +420,8 @@ public class BannerLayoutManager extends RecyclerView.LayoutManager {
         } else {
             mSpaceInOther = getTotalSpaceInOther() - mDecoratedMeasurementInOther - mDistanceToBottom;
         }
-
+        mSpaceMain = 0;
+        mSpaceInOther = 0;
         mInterval = setInterval();
         setUp();
         mLeftItems = (int) Math.abs(minRemoveOffset() / mInterval) + 1;
@@ -647,8 +648,7 @@ public class BannerLayoutManager extends RecyclerView.LayoutManager {
         if (itemCount == 0) return;
 
         // make sure that current position start from 0 to 1
-        final int currentPos = mShouldReverseLayout ?
-                -getCurrentPositionOffset() : getCurrentPositionOffset();
+        final int currentPos = mShouldReverseLayout ? -getCurrentPositionOffset() : getCurrentPositionOffset();
         int start = currentPos - mLeftItems;
         int end = currentPos + mRightItems;
 
@@ -692,6 +692,7 @@ public class BannerLayoutManager extends RecyclerView.LayoutManager {
                 resetViewProperty(scrap);
                 // we need i to calculate the real offset of current view
                 final float targetOffset = getProperty(i) - mOffset;
+                Log.e(TAG, "targetOffset " + targetOffset);
                 layoutScrap(scrap, targetOffset);
                 final float orderWeight = mEnableBringCenterToFront ?
                         setViewElevation(scrap, targetOffset) : adapterPosition;

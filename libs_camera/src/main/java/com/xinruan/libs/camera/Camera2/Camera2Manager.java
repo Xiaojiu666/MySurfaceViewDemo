@@ -52,7 +52,7 @@ public class Camera2Manager extends CameraLoader {
     private int mCameraFacing = CameraCharacteristics.LENS_FACING_BACK;    //默认使用后置摄像头
     private CameraDevice mCameraDevice;
     private ImageReader mImageReader;
-    private CameraManager mCameraManager;
+
     private CameraCaptureSession mCameraCaptureSession;
 
     //    private SurfaceTexture mSurfaceTexture;
@@ -62,7 +62,6 @@ public class Camera2Manager extends CameraLoader {
     public Camera2Manager(Activity mContext) {
         this.mContext = mContext;
         initThread();
-
         initSystemServer();
     }
 
@@ -70,7 +69,7 @@ public class Camera2Manager extends CameraLoader {
         handlerThread.start();
         mCameraHandler = new Handler(handlerThread.getLooper());
     }
-
+    private CameraManager mCameraManager;
     private WindowManager windowManager;
     private int mDisplayRotation;  //手机方向
 
